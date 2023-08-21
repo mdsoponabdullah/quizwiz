@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: #f9ecd2;
+}
+
+@layer components {
+  /* .btn-primary {
+    @apply py-2 px-4 bg-green-500 font-semibold rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75;
+  }
+
+  .btn-purple {
+    @apply mx-8 hover:bg-purple-700 hover:text-black focus:ring-4 focus:outline-none focus:ring-black focus:ring-offset-2 duration-500  px-4 sm:mx-3 sm:my-2 py-1 border sm:text-white sm:bg-red-600 bg-purple-200 rounded-full font-semibold;
+  } */
+  .btn-blue {
+    @apply bg-blue py-1 px-3 rounded-xl text-sm;
+  }
+
+  .inputBox1 {
+    @apply w-full text-base bg-[#F3E1BD] focus:outline-none  border-none rounded-xl px-3 py-1;
+  }
+  .heading {
+    @apply text-xl tracking-wider text-center font-extrabold mb-4;
+  }
+  .label {
+    @apply ml-3 text-base tracking-wider block font-bold;
+  }
+  .input1 {
+    @apply px-1 py-[2px] bg-[#ffffff] rounded-lg ;
+  }
+}
