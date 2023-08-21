@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  background: #f9ecd2;
+  background: #f9ecd2 !important;
 }
 
 @layer components {
@@ -28,6 +28,6 @@ body {
     @apply ml-3 text-base tracking-wider block font-bold;
   }
   .input1 {
-    @apply px-1 py-[2px] bg-[#ffffff] rounded-lg ;
+    @apply px-1 py-[2px] bg-[#ffffff] rounded-lg;
   }
 }

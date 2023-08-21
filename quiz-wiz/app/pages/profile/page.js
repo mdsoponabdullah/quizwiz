@@ -4,11 +4,21 @@ import { UserAuth } from "../../context/AuthContext";
 import { database } from "../../firebase";
 import { collection, doc, getDoc, updateDoc } from "firebase/firestore";
 import Popup from "../../component/update";
+import Loading from "../../component/loading";
+
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   const { user } = UserAuth();
   const [loding, setLoading] = useState(true);
   const [userData, setUserData] = useState({});
+
+  if (
+    localStorage.getItem("login") == "false" ||
+    !localStorage.getItem("login")
+  ) {
+    useRouter().push("/pages/login");
+  }
 
   //// page purapuri hoyar por user login/logout check korar jonno
 
@@ -19,6 +29,7 @@ const Page = () => {
     };
     checkAuthentication();
     console.log("profile page", user);
+
     getData();
   }, [user]);
 
@@ -55,7 +66,7 @@ const Page = () => {
               <div className="bg-white p-3 border-green-400">
                 <div className="image overflow-hidden">
                   {loding ? (
-                    ""
+                    <Loading />
                   ) : (
                     <img
                       alt={`${user.displayName}'s Profile Photo`}
@@ -109,6 +120,8 @@ const Page = () => {
                     dateOfBirth={userData.dateOfBirth}
                     currentAddress={userData.currentAddress}
                     uid={user.uid}
+                    profesion={userData.profesion}
+                    discription={userData.discription}
                   />
                 </div>
                 <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
@@ -189,6 +202,9 @@ const Page = () => {
         </div>
       </div>
     );
+  else {
+    <Loading />;
+  }
 };
 
 export default Page;

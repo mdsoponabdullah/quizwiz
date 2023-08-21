@@ -17,8 +17,8 @@ const Popup = (props) => {
   );
   const [email, setEmail] = useState(props.email);
   const [dateOfBirth, setDateOfBirth] = useState(props.dateOfBirth);
-  const [profesion, setProfesion] = useState("");
-  const [discription, setDiscription] = useState("");
+  const [profesion, setProfesion] = useState(props.profesion);
+  const [discription, setDiscription] = useState(props.discription);
 
   const togglePopup = () => {
     setIsOpen(!isOpen);

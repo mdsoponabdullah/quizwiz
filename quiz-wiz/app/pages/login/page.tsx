@@ -11,10 +11,17 @@ import { auth } from "../../firebase";
 import { useRouter } from "next/navigation";
 
 const Login = () => {
+
+  if (
+    localStorage.getItem("login") == "true"
+  ) {
+    useRouter().push("/pages/profile");
+  }
+
   const { user, googleSignIn } = UserAuth();
   const router = useRouter();
   if (user) {
-    router.push("/");
+    router.push("/pages/insertInformation");
   }
 
   const [email, setEmail] = useState("");
@@ -24,16 +31,23 @@ const Login = () => {
     if (email == "" || password == "") return;
     try {
       const user = await signInWithEmailAndPassword(auth, email, password);
-      console.log(user);
+      localStorage.setItem("login", "true");
+      if (user) {
+        localStorage.setItem("login", "true");
+      }
     } catch (error) {
       console.error("error Ocured", error);
     }
   };
 
   const singnInwithGoogle = async () => {
+    {
+      localStorage.setItem("name", "sopon");
+    }
     try {
       const ususerCredentialer = await googleSignIn();
-      // console.log(ususerCredentialer);
+
+      localStorage.setItem("login", "true");
     } catch (error) {}
     console.log(user);
   };

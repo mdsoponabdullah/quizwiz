@@ -10,7 +10,11 @@ import { UserAuth } from "../../context/AuthContext";
 import { useRouter } from "next/navigation";
 
 const Signup = () => {
-  const { user, googleSignIn } = UserAuth();
+  if (localStorage.getItem("login") == "true") {
+    useRouter().push("/pages/profile");
+  }
+
+  const { googleSignIn } = UserAuth();
   const router = useRouter();
 
   const [firstName, setFirstName] = useState("");
@@ -56,6 +60,9 @@ const Signup = () => {
     try {
       const ususerCredentialer = await googleSignIn();
       //console.log(ususerCredentialer);
+      if (ususerCredentialer) {
+        localStorage.setItem("login", "true");
+      }
 
       router.push("/pages/insertInformation");
     } catch (error) {

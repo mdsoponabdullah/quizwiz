@@ -10,6 +10,7 @@ const Navigation = () => {
 
   const logOuthandler = async () => {
     try {
+      localStorage.setItem("login", "false");
       await LogOut();
     } catch (error) {}
   };
