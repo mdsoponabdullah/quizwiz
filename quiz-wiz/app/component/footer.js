@@ -233,7 +233,7 @@ const Footer = () => {
               height={229}
               viewBox="0 0 217 229"
               fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+              xmlns="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
             >
               <path
                 d="M-64 140.5C-64 62.904 -1.096 1.90666e-05 76.5 1.22829e-05C154.096 5.49924e-06 217 62.904 217 140.5C217 218.096 154.096 281 76.5 281C-1.09598 281 -64 218.096 -64 140.5Z"

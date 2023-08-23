@@ -3,22 +3,18 @@ import React, { useEffect, useState } from "react";
 import { UserAuth } from "../../context/AuthContext";
 import { database } from "../../firebase";
 import { collection, doc, getDoc, updateDoc } from "firebase/firestore";
-import Popup from "../../component/update";
+import Popup from "../../component/updateUserInfo";
 import Loading from "../../component/loading";
+import ImageUploadModal from "../../component/uploadimage";
 
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Page = () => {
   const { user } = UserAuth();
   const [loding, setLoading] = useState(true);
   const [userData, setUserData] = useState({});
-
-  if (
-    localStorage.getItem("login") == "false" ||
-    !localStorage.getItem("login")
-  ) {
-    useRouter().push("/pages/login");
-  }
+  const [uploadImage, setUploadImage] = useState(true);
 
   //// page purapuri hoyar por user login/logout check korar jonno
 
@@ -70,13 +66,14 @@ const Page = () => {
                   ) : (
                     <img
                       alt={`${user.displayName}'s Profile Photo`}
-                      src={user.photoURL}
+                      src={userData.imgUrl ? userData.imgUrl : user.photoURL}
                       className="rounded-full"
                       width={300}
                       height={300}
                     />
                   )}
                 </div>
+                <div>{uploadImage && <ImageUploadModal />}</div>
                 <h1 className="text-gray-900 font-bold text-xl leading-8  text-center text-blue">
                   {userData.firstName + " " + userData.lastName}
                 </h1>
@@ -110,19 +107,25 @@ const Page = () => {
               {/* About Section */}
               <div className="bg-white p-3 shadow-sm rounded-sm">
                 <div className="text-right">
-                  <Popup
-                    firstName={userData.firstName}
-                    lastName={userData.lastName}
-                    gender={userData.gender}
-                    contactNumber={userData.contactNumber}
-                    parmanentAddress={userData.parmanentAddress}
-                    email={userData.email}
-                    dateOfBirth={userData.dateOfBirth}
-                    currentAddress={userData.currentAddress}
-                    uid={user.uid}
-                    profesion={userData.profesion}
-                    discription={userData.discription}
-                  />
+                  {userData.firstName ? (
+                    <Popup
+                      firstName={userData.firstName}
+                      lastName={userData.lastName}
+                      gender={userData.gender}
+                      contactNumber={userData.contactNumber}
+                      parmanentAddress={userData.parmanentAddress}
+                      email={userData.email}
+                      dateOfBirth={userData.dateOfBirth}
+                      currentAddress={userData.currentAddress}
+                      uid={user.uid}
+                      profesion={userData.profesion}
+                      discription={userData.discription}
+                    />
+                  ) : (
+                    <Link className="btn-blue" href="/pages/insertInformation">
+                      Your Information
+                    </Link>
+                  )}
                 </div>
                 <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
                   <span clas="text-green-500">

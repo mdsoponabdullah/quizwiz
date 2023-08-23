@@ -19,13 +19,13 @@ body {
   }
 
   .inputBox1 {
-    @apply w-full text-base bg-[#F3E1BD] focus:outline-none  border-none rounded-xl px-3 py-1;
+    @apply w-full text-sm bg-[#F3E1BD] focus:outline-none  border-none rounded px-3 py-1;
   }
   .heading {
     @apply text-xl tracking-wider text-center font-extrabold mb-4;
   }
   .label {
-    @apply ml-3 text-base tracking-wider block font-bold;
+    @apply text-base tracking-wider block font-bold;
   }
   .input1 {
     @apply px-1 py-[2px] bg-[#ffffff] rounded-lg;

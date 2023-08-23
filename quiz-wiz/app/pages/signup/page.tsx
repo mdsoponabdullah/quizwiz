@@ -10,33 +10,23 @@ import { UserAuth } from "../../context/AuthContext";
 import { useRouter } from "next/navigation";
 
 const Signup = () => {
-  if (localStorage.getItem("login") == "true") {
-    useRouter().push("/pages/profile");
+  const { googleSignIn, user } = UserAuth();
+  const router = useRouter();
+  if (user) {
+    router.push("/pages/profile");
+    localStorage.setItem("login", "true");
   }
 
-  const { googleSignIn } = UserAuth();
-  const router = useRouter();
-
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
 
   const signupHandler = async () => {
-    alert(firstName);
     if (password1 != password2) {
       alert("Password is not mached");
     }
-    if (
-      firstName == "" ||
-      lastName == "" ||
-      email == "" ||
-      userName == "" ||
-      password1 == "" ||
-      password2 == ""
-    )
+    if (email == "" || userName == "" || password1 == "" || password2 == "")
       return;
 
     try {
@@ -49,8 +39,9 @@ const Signup = () => {
       await updateProfile(ususerCredentialer.user, {
         displayName: userName,
       });
+      localStorage.setItem("login", "false");
 
-      router.push("/pages/insertInformation");
+      router.push("/pages/profile");
     } catch (error) {
       console.log("error occured", error);
     }
@@ -64,7 +55,7 @@ const Signup = () => {
         localStorage.setItem("login", "true");
       }
 
-      router.push("/pages/insertInformation");
+      router.push("/pages/profile");
     } catch (error) {
       console.error("error occured", error);
     }
@@ -74,33 +65,19 @@ const Signup = () => {
     <div className="bg-white p-20  mx-20">
       <h1 className="heading">Sign Up</h1>
       <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-        <div className="flex space-x-20">
-          <div className="mr-2">
-            <label htmlFor="text" className="label">
-              First Name
-            </label>
-            <input
-              type="text"
-              id="text"
-              className="inputBox1 pr-10"
-              placeholder="Your First Name"
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="text" className="label ">
-              Last Name
-            </label>
-            <input
-              type="text"
-              id="text"
-              className="inputBox1 pr-10"
-              placeholder="Your Last Name"
-              onChange={(e) => setLastName(e.target.value)}
-            />
-          </div>
+        <div className="w-1/2 m-auto">
+          <label htmlFor="text" className="label">
+            Username
+          </label>
+          <input
+            type="text"
+            id="text"
+            className="inputBox1"
+            placeholder="Your First Name"
+            onChange={(e) => setUserName(e.target.value)}
+          />
         </div>
-        <div>
+        <div className="w-1/2 m-auto">
           <label htmlFor="email" className="label ">
             Email
           </label>
@@ -113,19 +90,7 @@ const Signup = () => {
           />
         </div>
 
-        <div>
-          <label htmlFor="text" className="label ">
-            Username
-          </label>
-          <input
-            type="text"
-            id="text"
-            className="inputBox1"
-            placeholder="Your First Name"
-            onChange={(e) => setUserName(e.target.value)}
-          />
-        </div>
-        <div>
+        <div className="w-1/2 m-auto">
           <label htmlFor="password" className="label">
             Password
           </label>
@@ -137,7 +102,7 @@ const Signup = () => {
             onChange={(e) => setPassword1(e.target.value)}
           />
         </div>
-        <div>
+        <div className="w-1/2 m-auto">
           <label htmlFor="password" className="label">
             Confirm Password
           </label>
@@ -159,7 +124,7 @@ const Signup = () => {
           </button>
         </div>
       </form>
-      <div>
+      <div className="w-1/2 m-auto">
         <button
           onClick={singnInwithGoogle}
           className="flex text-sm font-bold items-center bg-white rounded-lg p-2 shadow-sm hover:bg-gray-100"

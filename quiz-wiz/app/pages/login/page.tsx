@@ -11,17 +11,11 @@ import { auth } from "../../firebase";
 import { useRouter } from "next/navigation";
 
 const Login = () => {
-
-  if (
-    localStorage.getItem("login") == "true"
-  ) {
-    useRouter().push("/pages/profile");
-  }
-
   const { user, googleSignIn } = UserAuth();
   const router = useRouter();
   if (user) {
-    router.push("/pages/insertInformation");
+    router.push("/pages/profile");
+    localStorage.setItem("login", "true");
   }
 
   const [email, setEmail] = useState("");
@@ -32,9 +26,6 @@ const Login = () => {
     try {
       const user = await signInWithEmailAndPassword(auth, email, password);
       localStorage.setItem("login", "true");
-      if (user) {
-        localStorage.setItem("login", "true");
-      }
     } catch (error) {
       console.error("error Ocured", error);
     }
@@ -55,7 +46,7 @@ const Login = () => {
     <div className="bg-white p-20  mx-20">
       <h1 className="heading">Sign In</h1>
       <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-        <div>
+        <div className="w-1/2 m-auto">
           <label htmlFor="email" className="label ">
             UserName/Email
           </label>
@@ -63,19 +54,19 @@ const Login = () => {
             type="email"
             id="email"
             onChange={(e) => setEmail(e.target.value)}
-            className="inputBox1"
+            className="inputBox1 text-sm"
             placeholder="Enter your email"
             required
           />
         </div>
-        <div>
-          <label htmlFor="password" className="label">
+        <div className="w-1/2 m-auto">
+          <label htmlFor="password" className="label text-base">
             Password
           </label>
           <input
             type="password"
             id="password"
-            className="inputBox1"
+            className="inputBox1 text-sm"
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password"
             required
@@ -91,7 +82,7 @@ const Login = () => {
           </button>
         </div>
       </form>
-      <div>
+      <div className="w-1/2 m-auto">
         <button
           onClick={singnInwithGoogle}
           className="flex text-sm font-bold items-center bg-white rounded-lg p-2 shadow-sm hover:bg-gray-100"
