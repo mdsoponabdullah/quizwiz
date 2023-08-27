@@ -1,5 +1,5 @@
 import React from "react";
-import RunningContest from "./component/runningcontest";
+import RunningContest from "./pages/runningContest/page";
 import PastContest from "./component/pastContests";
 import FrequetlyAsketQuestion from "./component/frequentlyAskedQuestion";
 import SectionToUpdateLater from "./component/sectionToUpdateLater";

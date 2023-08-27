@@ -10,9 +10,11 @@ const UploadImage = () => {
   const [imgUrl, setImgUrl] = useState(null);
   const [progresspercent, setProgresspercent] = useState(0);
   const { user } = UserAuth();
+  const [popUp, setPopUp] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setPopUp(true);
     const file = e.target[0]?.files[0];
     if (!file) return;
     const storageRef = ref(storage, `files/${file.name}`);
@@ -60,26 +62,35 @@ const UploadImage = () => {
   if (user && imgUrl) handleUpdate();
 
   return (
-    <div className="w-1/2 m-auto">
-      <form onSubmit={handleSubmit} className="m-auto text-center">
+    <div className="mt-1">
+      <div>
+        {popUp && (
+          <div className="fixed  flex items-center justify-center z-50">
+            <div className="absolute "></div>
+            <div className="p-6 rounded-lg z-10">
+              <div
+                className="text-center m-auto"
+                style={{ width: `${progresspercent}` }}
+              >
+                <h1 className="text-blue text-[200px] font-black drop-shadow-lg absolute right-10">
+                  {" "}
+                  {progresspercent}%
+                </h1>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <form onSubmit={handleSubmit} className="text-center flex -space-x-10">
         <input type="file" className="text-sm" />
         <button
           type="submit"
-          className="btn-blue m-auto text-center text-[#ffffff]"
+          className="btn-blue m-auto text-center font-semibold text-[#ffffff]"
         >
-          Upload
+          Change Picture
         </button>
       </form>
-      {!imgUrl && (
-        <div className="">
-          <div
-            className="text-center m-auto"
-            style={{ width: `${progresspercent}` }}
-          >
-            {progresspercent}%
-          </div>
-        </div>
-      )}
     </div>
   );
 };

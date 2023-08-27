@@ -40,13 +40,13 @@ const Navigation = () => {
       <div className="float-right">
         <ul className="flex  text-[#ffffff] space-x-4 space-y-0 ">
           <li className="">
-            <Link className="btn-blue" href="#">
+            <Link className="btn-blue" href="/pages/quiz">
               contest
             </Link>
           </li>
 
           <li className="">
-            <Link className="btn-blue" href="#">
+            <Link className="btn-blue" href="/pages/createcontest">
               Create
             </Link>
           </li>

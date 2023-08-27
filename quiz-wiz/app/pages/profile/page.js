@@ -2,19 +2,18 @@
 import React, { useEffect, useState } from "react";
 import { UserAuth } from "../../context/AuthContext";
 import { database } from "../../firebase";
-import { collection, doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import Popup from "../../component/updateUserInfo";
 import Loading from "../../component/loading";
-import ImageUploadModal from "../../component/uploadimage";
+import UploadImage from "../../component/uploadimage";
 
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 const Page = () => {
   const { user } = UserAuth();
   const [loding, setLoading] = useState(true);
   const [userData, setUserData] = useState({});
-  const [uploadImage, setUploadImage] = useState(true);
+  const [skill, setSkill] = useState("");
 
   //// page purapuri hoyar por user login/logout check korar jonno
 
@@ -25,9 +24,19 @@ const Page = () => {
     };
     checkAuthentication();
     console.log("profile page", user);
+    if (userData.skill) {
+      let fLen = userData.skill.length;
+      let text = "";
+
+      for (let i = 0; i < fLen; i++) {
+        text += userData.skill[i] + "  ";
+      }
+
+      setSkill(text);
+    }
 
     getData();
-  }, [user]);
+  }, [user, userData]);
 
   const getData = async () => {
     if (user) {
@@ -36,11 +45,10 @@ const Page = () => {
       if (docSnap.exists()) {
         console.log("Document data:", docSnap.data());
 
-        const abc = docSnap.data();
-        console.log(typeof abc);
+        const userInformation = docSnap.data();
 
-        if (abc) {
-          setUserData(abc);
+        if (userInformation) {
+          setUserData(userInformation);
 
           //alert(userData.firstName);
         }
@@ -67,13 +75,11 @@ const Page = () => {
                     <img
                       alt={`${user.displayName}'s Profile Photo`}
                       src={userData.imgUrl ? userData.imgUrl : user.photoURL}
-                      className="rounded-full"
-                      width={300}
-                      height={300}
+                      className="w-[200px] h-[200px] rounded-full ring-4  m-auto right-4"
                     />
                   )}
                 </div>
-                <div>{uploadImage && <ImageUploadModal />}</div>
+
                 <h1 className="text-gray-900 font-bold text-xl leading-8  text-center text-blue">
                   {userData.firstName + " " + userData.lastName}
                 </h1>
@@ -83,18 +89,22 @@ const Page = () => {
                 <p className="text-sm text-gray-500 hover:text-gray-600 leading-6  text-center">
                   {userData.discription}
                 </p>
-                <ul className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
-                  <li className="flex items-center py-3">
+                <div className="w-44  m-auto ">
+                  <h1 className="text-left font-bold border-b w-8/13">Skill</h1>
+                  <p>{skill}</p>
+                </div>
+                <ul className="bg-gray-100 text-gray-600 hover:text-gray-700  py-2 px-3 mt-3 divide-y rounded ">
+                  <li className="flex items-center text-base py-3">
                     <span>Status</span>
                     <span className="ml-auto">
-                      <span className="bg-green-500 py-1 px-2 rounded text-white text-sm">
+                      <span className="bg-green-500 py-1 px-2 rounded text-white text-base">
                         Active
                       </span>
                     </span>
                   </li>
-                  <li className="flex items-center py-3">
-                    <span>Member since</span>
-                    <span className="ml-auto">{userData.joinDate}</span>
+                  <li className="flex space-x-1 items-center py-3 text-base">
+                    <p>Member since</p>
+                    <p className="ml-auto text-base">{userData.joinDate}</p>
                   </li>
                 </ul>
               </div>
@@ -104,29 +114,44 @@ const Page = () => {
             {/* Right Side */}
             <div className="w-full md:w-9/12 mx-2 h-64">
               {/* Profile tab */}
+              {/* upload image and edit profile */}
+              <div className="mb-10">
+                <div className="flex  float-right space-x-5 ">
+                  <div>
+                    <UploadImage />
+                  </div>
+
+                  <div>
+                    {" "}
+                    {userData.firstName ? (
+                      <Popup
+                        firstName={userData.firstName}
+                        lastName={userData.lastName}
+                        gender={userData.gender}
+                        contactNumber={userData.contactNumber}
+                        parmanentAddress={userData.parmanentAddress}
+                        email={userData.email}
+                        dateOfBirth={userData.dateOfBirth}
+                        currentAddress={userData.currentAddress}
+                        uid={user.uid}
+                        profesion={userData.profesion}
+                        discription={userData.discription}
+                      />
+                    ) : (
+                      <Link
+                        className="btn-blue"
+                        href="/pages/insertInformation"
+                      >
+                        Emter Your Information
+                      </Link>
+                    )}
+                  </div>
+                </div>
+              </div>
+              {/*End upload image and edit profile */}
+
               {/* About Section */}
               <div className="bg-white p-3 shadow-sm rounded-sm">
-                <div className="text-right">
-                  {userData.firstName ? (
-                    <Popup
-                      firstName={userData.firstName}
-                      lastName={userData.lastName}
-                      gender={userData.gender}
-                      contactNumber={userData.contactNumber}
-                      parmanentAddress={userData.parmanentAddress}
-                      email={userData.email}
-                      dateOfBirth={userData.dateOfBirth}
-                      currentAddress={userData.currentAddress}
-                      uid={user.uid}
-                      profesion={userData.profesion}
-                      discription={userData.discription}
-                    />
-                  ) : (
-                    <Link className="btn-blue" href="/pages/insertInformation">
-                      Your Information
-                    </Link>
-                  )}
-                </div>
                 <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
                   <span clas="text-green-500">
                     <svg
