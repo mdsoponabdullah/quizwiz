@@ -1,18 +1,19 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { UserAuth } from "../../context/AuthContext";
-import { database } from "../../firebase";
-import { doc, getDoc } from "firebase/firestore";
+
 import Popup from "../../component/updateUserInfo";
 import Loading from "../../component/loading";
-import UploadImage from "../../component/uploadimage";
+import UploadImage from "../../component/uploadprofileimage";
+import ContestStatitics from "../../component/contestStatistics";
+import BarChart from "../../component/BarChart";
 
 import Link from "next/link";
 
 const Page = () => {
-  const { user } = UserAuth();
+  const { user, userData } = UserAuth();
   const [loding, setLoading] = useState(true);
-  const [userData, setUserData] = useState({});
+
   const [skill, setSkill] = useState("");
 
   //// page purapuri hoyar por user login/logout check korar jonno
@@ -24,7 +25,7 @@ const Page = () => {
     };
     checkAuthentication();
     console.log("profile page", user);
-    if (userData.skill) {
+    if (userData) {
       let fLen = userData.skill.length;
       let text = "";
 
@@ -34,32 +35,28 @@ const Page = () => {
 
       setSkill(text);
     }
-
-    getData();
   }, [user, userData]);
 
-  const getData = async () => {
-    if (user) {
-      const docRef = doc(database, "users", user.uid);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
+  let score = [];
+  let contestNumbers = [];
+  let contestTitle = [];
+  let i = 1;
 
-        const userInformation = docSnap.data();
+  if (userData) {
+    userData.virtualContestStatistics.map((item) => {
+      score.push(item.score);
+      contestTitle.push(item.contestTitle);
 
-        if (userInformation) {
-          setUserData(userInformation);
+      contestNumbers.push(i++);
+    });
+  }
 
-          //alert(userData.firstName);
-        }
-      } else {
-        // docSnap.data() will be undefined in this case
-        console.log("No such document!");
-      }
-    }
+  const data = {
+    score: score,
+    contestTitle: contestTitle,
   };
 
-  if (userData.firstName && user)
+  if (userData)
     return (
       <div className="overflow-hidden mt-10">
         <div className="container mx-auto my-5 p-5 bg-[#F3E1BD]">
@@ -225,6 +222,16 @@ const Page = () => {
               <div className="my-4" />
 
               {/* End of profile tab */}
+              <ContestStatitics
+                score={score}
+                contestNumbers={contestNumbers}
+                virtualContestStatistics={userData.virtualContestStatistics}
+              />
+              <ContestStatitics
+                score={score}
+                contestNumbers={contestNumbers}
+                virtualContestStatistics={userData.virtualContestStatistics}
+              />
             </div>
           </div>
         </div>

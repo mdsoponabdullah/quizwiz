@@ -1,9 +1,9 @@
 import React from "react";
 import RunningContest from "./pages/runningContest/page";
-import PastContest from "./component/pastContests";
+import PastContest from "./pages/PastContest/page";
 import FrequetlyAsketQuestion from "./component/frequentlyAskedQuestion";
 import SectionToUpdateLater from "./component/sectionToUpdateLater";
-import UpcomingContest from "./component/upcomingContest";
+import UpcomingContest from "./pages/Upcomingcontest/page";
 import QuizWizForum from "./component/quizWizForum";
 
 const page = () => {

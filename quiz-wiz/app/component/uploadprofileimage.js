@@ -7,9 +7,10 @@ import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { doc, updateDoc } from "firebase/firestore";
 
 const UploadImage = () => {
+  const { user } = UserAuth();
   const [imgUrl, setImgUrl] = useState(null);
   const [progresspercent, setProgresspercent] = useState(0);
-  const { user } = UserAuth();
+
   const [popUp, setPopUp] = useState(false);
 
   const handleSubmit = (e) => {

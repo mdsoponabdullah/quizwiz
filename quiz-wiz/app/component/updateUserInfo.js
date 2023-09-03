@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 import { database } from "../firebase";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 
 const Popup = (props) => {
@@ -25,34 +25,32 @@ const Popup = (props) => {
   };
 
   const handleUpdate = async () => {
-    if (1) {
-      const data = {
-        firstName: firstName,
-        lastName: lastName,
-        gender: gender,
-        contactNumber: contactNumber,
-        currentAddress: currentAddress,
-        parmanentAddress: parmanentAddress,
-        email: email,
-        dateOfBirth: dateOfBirth,
-        skill: [],
-        discription: discription,
-        profesion: profesion,
-      };
-      const updateRef = doc(database, "users", props.uid);
+    const data = {
+      firstName: firstName,
+      lastName: lastName,
+      gender: gender,
+      contactNumber: contactNumber,
+      currentAddress: currentAddress,
+      parmanentAddress: parmanentAddress,
+      email: email,
+      dateOfBirth: dateOfBirth,
+      skill: [],
+      discription: discription,
+      profesion: profesion,
+    };
+    const updateRef = doc(database, "users", props.uid);
 
-      await updateDoc(updateRef, data)
-        .then(() => {
-          alert("updated");
-          //isOpen(false)
-          setIsOpen(false);
-          window.location.reload();
-        })
-        .catch((error) => {
-          alert(error);
-          console.error(error);
-        });
-    }
+    await updateDoc(updateRef, data)
+      .then(() => {
+        alert("updated");
+        //isOpen(false)
+        setIsOpen(false);
+        window.location.reload();
+      })
+      .catch((error) => {
+        alert(error);
+        console.error(error);
+      });
   };
 
   return (

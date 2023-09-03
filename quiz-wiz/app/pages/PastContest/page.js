@@ -4,7 +4,7 @@ import { database } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import Link from "next/link";
 
-const runningcontest = () => {
+const PastContest = () => {
   const [contests, setContests] = useState([]);
 
   const [showAll, setShowAll] = useState(false);
@@ -38,7 +38,7 @@ const runningcontest = () => {
   return (
     <div className="m-5">
       <h1 className="text-base ml-5 tracking-widest font-semibold">
-        Running contest
+      Past Contest 
       </h1>
       <div className=" bg-regal-blue p-5 rounded-2xl ">
         <ul className="list-decimal text-sm font-semibold ">
@@ -67,4 +67,4 @@ const runningcontest = () => {
   );
 };
 
-export default runningcontest;
+export default PastContest;

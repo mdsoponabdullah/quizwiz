@@ -26,8 +26,10 @@ const Signup = () => {
     if (password1 != password2) {
       alert("Password is not mached");
     }
-    if (email == "" || userName == "" || password1 == "" || password2 == "")
+    if (email == "" || userName == "" || password1 == "" || password2 == "") {
+      alert("Please Fill all field");
       return;
+    }
 
     try {
       const ususerCredentialer = await createUserWithEmailAndPassword(
@@ -39,9 +41,8 @@ const Signup = () => {
       await updateProfile(ususerCredentialer.user, {
         displayName: userName,
       });
-      localStorage.setItem("login", "false");
 
-      router.push("/pages/profile");
+      router.push("/pages/insertInformation");
     } catch (error) {
       console.log("error occured", error);
     }
@@ -58,6 +59,7 @@ const Signup = () => {
       router.push("/pages/profile");
     } catch (error) {
       console.error("error occured", error);
+      alert("this email is already used");
     }
   };
 

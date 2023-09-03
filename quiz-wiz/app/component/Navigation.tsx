@@ -5,8 +5,12 @@ import { useState, useEffect } from "react";
 import Btn from "./btn";
 
 const Navigation = () => {
-  const { user, LogOut } = UserAuth();
+  const { user, LogOut, userData } = UserAuth();
   const [loding, setLoading] = useState(true);
+
+  if (userData) {
+    console.log("inside Navigation", userData);
+  }
 
   const logOuthandler = async () => {
     try {
@@ -15,7 +19,7 @@ const Navigation = () => {
     } catch (error) {}
   };
 
-  //// page purapuri hoyar por user login/logout check korar jonno
+  // page purapuri hoyar por user login/logout check korar jonno
   useEffect(() => {
     const checkAuthentication = async () => {
       await new Promise((resolve) => setTimeout(resolve, 500));
@@ -23,7 +27,7 @@ const Navigation = () => {
       console.log(user);
     };
     checkAuthentication();
-  }, [user]);
+  }, []); //user
 
   return (
     <div style={{ paddingTop: "20px" }} className="px-14 flex-2 pt-6">
@@ -69,7 +73,7 @@ const Navigation = () => {
                   <div className="group relative">
                     <img
                       alt={`${user.displayName}'s Profile Photo`}
-                      src={user.photoURL}
+                      src={userData ? userData.imgUrl : user.photoURL}
                       className="h-7 w-7 rounded-xl"
                       width={50}
                       height={50}
