@@ -154,6 +154,15 @@ const page = ({ params }) => {
                         <p className="text-gray-600">
                           {question.questionDescription}
                         </p>
+                        <div>
+                          {question.imgUrl && (
+                            <img
+                              alt="loading"
+                              src={question.imgUrl}
+                              className="w-[200px] h-[200px] rounded-full ring-4  m-auto right-4"
+                            />
+                          )}
+                        </div>
                       </div>
 
                       <ol className="pl-6 mt-2">

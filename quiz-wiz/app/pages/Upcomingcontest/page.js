@@ -21,7 +21,7 @@ const UpcomingContest = () => {
       const getRunnigContest = await getDocs(dataBaseRef);
       getRunnigContest.forEach((doc) => {
         const contest = { contestId: doc.id, contestData: doc.data() };
-        // console.log(doc.id, " => ", doc.data());
+
         contestsContainer.push(contest);
       });
       console.log("sopon", contestsContainer);

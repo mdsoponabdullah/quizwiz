@@ -59,7 +59,7 @@ const Page = () => {
   if (userData)
     return (
       <div className="overflow-hidden mt-10">
-        <div className="container mx-auto my-5 p-5 bg-[#F3E1BD]">
+        <div className=" container mx-auto my-5 p-5 bg-[#F3E1BD] h-[700px]">
           <div className="md:flex no-wrap md:-mx-2 ">
             {/* Left Side */}
             <div className="w-full md:w-3/12 md:mx-2">
@@ -227,11 +227,11 @@ const Page = () => {
                 contestNumbers={contestNumbers}
                 virtualContestStatistics={userData.virtualContestStatistics}
               />
-              <ContestStatitics
+              {/* <ContestStatitics
                 score={score}
                 contestNumbers={contestNumbers}
                 virtualContestStatistics={userData.virtualContestStatistics}
-              />
+              /> */}
             </div>
           </div>
         </div>

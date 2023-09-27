@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { UserAuth } from "../../context/AuthContext";
+
+import { collection, addDoc } from "firebase/firestore";
 import { database } from "../../firebase";
-import { collection, doc, addDoc } from "firebase/firestore";
+import UploadQuestionimage from "../../component/uploloadQusetionImage";
 
 const page = () => {
   const [contestTitle, setContestTitle] = useState("");
@@ -19,7 +21,12 @@ const page = () => {
   const [b, setB] = useState("");
   const [c, setC] = useState("");
   const [d, setD] = useState("");
+
   const [correctAns, setCorrectAns] = useState("");
+  const [questionImage, setQuestionImage] = useState(null);
+  const [progresspercent, setProgresspercent] = useState(0);
+  const [popUp, setPopUp] = useState(false);
+
   const { user } = UserAuth();
   useEffect(() => {
     if (user) {
@@ -46,7 +53,7 @@ const page = () => {
     const question = {
       questionNumber: questionNumber,
       questionDescription: questionDescription,
-      imageUrl: "",
+      imageUrl: questionImage,
       a: a,
       b: b,
       c: c,
@@ -62,6 +69,7 @@ const page = () => {
     setD("");
     setCorrectAns("");
     setQuestionDescription("");
+    setQuestionImage(null);
     setQuestionNumber(questionNumber + 1);
 
     console.log(setsOfmcq);
@@ -129,6 +137,7 @@ const page = () => {
   return (
     <div>
       <div className="mt-20 text-center w-1/3 m-auto">
+        {/* add contest discription */}
         <form onSubmit={addQuestionTitle}>
           <label className="label text-left pl-1">context title </label>
           <div>
@@ -182,19 +191,25 @@ const page = () => {
             />
           </div>
         </form>
+
+        {/* add mcq question */}
+
+        <div className="mt-20">
+          <div className="mt-1">
+            <input
+              className="inputBox1"
+              type="text"
+              value={questionDescription}
+              placeholder={questionNumber
+                .toString()
+                .concat(" QuestionDescription")}
+              onChange={(e) => setQuestionDescription(e.target.value)}
+            />
+          </div>
+          <UploadQuestionimage setQuestionImage={setQuestionImage} />
+        </div>
         <form className="space-y-3" onSubmit={addQuestion}>
-          <div className="mt-20 text-center">
-            <div className="mt-1">
-              <input
-                className="inputBox1"
-                type="text"
-                value={questionDescription}
-                placeholder={questionNumber
-                  .toString()
-                  .concat(" QuestionDescription")}
-                onChange={(e) => setQuestionDescription(e.target.value)}
-              />
-            </div>
+          <div className=" text-center">
             <div className="mt-1">
               <input
                 className="inputBox1"
@@ -246,7 +261,11 @@ const page = () => {
             </div>
           </div>
           <div>
-            <input type="submit" className="btn-blue" value="Add Question" />
+            <input
+              type="submit"
+              className="btn-blue m-auto text-center px-12 font-semibold text-[#ffffff]"
+              value="Add Question"
+            />
           </div>
         </form>
       </div>
@@ -302,6 +321,14 @@ const page = () => {
                     <p className="text-gray-600">
                       {question.questionDescription}
                     </p>
+
+                    {question.imageUrl && (
+                      <img
+                        alt={"Profile Photo"}
+                        src={question.imageUrl}
+                        className="m-auto right-4 overflow-hidden"
+                      />
+                    )}
                   </div>
 
                   <ol className="pl-6 mt-2">
@@ -321,7 +348,7 @@ const page = () => {
         <form onSubmit={createContest}>
           <input
             type="submit"
-            className="btn-blue float-right text-[#ffffff]"
+            className="btn-blue m-auto text-center px-12 font-semibold text-[#ffffff]"
             value="create Contest"
           />
         </form>
