@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <div className="overflow-hidden">
-      <footer className="relative z-10 bg-white pt-20 pb-10 lg:pt-[120px] lg:pb-20 ">
+      {/* <footer className="relative z-10 bg-white pt-20 pb-10 lg:pt-[120px] lg:pb-20 ">
         <div className="container mx-auto">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4 sm:w-2/3 lg:w-3/12">
@@ -282,7 +282,7 @@ const Footer = () => {
             </svg>
           </span>
         </div>
-      </footer>
+      </footer> */}
       {/* ====== Footer Section End */}
     </div>
   );
