@@ -41,17 +41,22 @@ const page = ({ params }) => {
     getContest();
   }, []);
 
-  var getTimer = async() => {
-    var duration = contest.duration;
-   
+  var getTimer = async () => {
+    var date1 = new Date(contest.startDate).getTime();
+    var date2 = new Date(contest.endDate).getTime();
+    var date = new Date().getTime();
+    var duration;
+    
+     duration = (date2 - date) / 60 / 1000;
+    setTimer(--duration);
+
     var second = countSecond;
     setInterval(() => {
       setCountSecond(second--);
       if (second == 0) {
-        if (duration == 0 && second==0) submitTheContest();
+        if (duration == 0 && second == 0||duration<0) submitTheContest();
         setTimer(--duration);
         second = 60;
-       
       }
     }, 1000);
   };
@@ -59,7 +64,7 @@ const page = ({ params }) => {
   useEffect(() => {
     if (contest) {
       console.log(contest);
-      setTimer(--contest.duration)
+
       getTimer();
     }
   }, [contest]);
@@ -143,6 +148,13 @@ const page = ({ params }) => {
               )}
             </h1>
             <h1 className="text-base text-center font-bold tracking-wide text-blue">
+              {contest.startDate && (
+                <span className="text-[#000111] font-semibold">
+                  Contest endDate: {contest.endDate}
+                </span>
+              )}
+            </h1>
+            <h1 className="text-base text-center font-bold tracking-wide text-blue">
               {contest.startTime && (
                 <span className="text-[#000111] font-semibold">
                   Contest startTime: {contest.startTime}
@@ -168,7 +180,7 @@ const page = ({ params }) => {
               {isNaN(timer) == false && (
                 <span className="text-[#000111] font-semibold">
                   {" "}
-                  {timer + ":" + countSecond}
+                  {parseInt(timer) + ":" + countSecond}
                 </span>
               )}
             </h1>

@@ -15,7 +15,6 @@ const page = () => {
   const [questionDescription, setQuestionDescription] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-
   const [lastRegistationDate, setLastRegistationDate] = useState("");
   const [duration, setDuration] = useState(0);
   const [startTime, setStartTime] = useState("");
@@ -87,9 +86,8 @@ const page = () => {
       !contestCreator.length &&
       !contestTitle.length &&
       !startDate.length &&
-      !lastRegistationDate.length &&
-      !startTime.length &&
-      !duration
+      !endDate.length &&
+      !lastRegistationDate.length
     ) {
       alert("some thing went wrong ");
       return;
@@ -104,6 +102,10 @@ const page = () => {
     //   duration
     // );
 
+    var date1 = new Date(startDate);
+    var date2 = new Date(endDate);
+    var duration1 = (date2.getTime() - date1.getTime()) / 60 / 1000;
+
     const contestObj = {
       contestCreator: contestCreator,
       contestTitle: contestTitle,
@@ -111,9 +113,9 @@ const page = () => {
       setsOfFillInTheBlank: setsOfFillInTheBlank,
       participantId: [],
       startDate: startDate,
-      startTime: startTime,
+      endDate: endDate,
       lastRegistationDate: lastRegistationDate,
-      duration: Number(duration),
+      duration: duration1,
     };
     setContest(contestObj);
     console.log(contest);
@@ -141,7 +143,7 @@ const page = () => {
       <div className="mt-20 text-center w-1/3 m-auto">
         {/* add contest discription */}
         <form onSubmit={addQuestionTitle}>
-          <label className="label text-left pl-1">context title </label>
+          <label className="label text-left pl-1">Context Title </label>
           <div>
             <input
               className="inputBox1"
@@ -151,50 +153,34 @@ const page = () => {
               onChange={(e) => setContestTitle(e.target.value)}
             />
           </div>
-          <label className="label text-left pl-1">start Date </label>
+          <label className="label text-left pl-1">Start Date and Time </label>
           <div>
             <input
               className="inputBox1"
-              type="date"
+              type="datetime-local"
               placeholder="start Date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
             />
           </div>
-          <label className="label text-left pl-1">start time </label>
 
+          <label className="label text-left pl-1">End Date and Time </label>
           <div>
             <input
               className="inputBox1"
-              type="time"
-              placeholder="start time"
-              value={startTime}
-              onChange={(e) => setStartTime(e.target.value)}
-            />
-          </div>
-          <div>
-            <input
               type="datetime-local"
-              className="inputBox1"
-              placeholder="start Time & Date"
-             
+              placeholder="start Date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
             />
           </div>
-          <label className="label text-left pl-1">duration </label>
+
+       
+          <label className="label text-left pl-1">Last Registation Date </label>
           <div>
             <input
               className="inputBox1"
-              type="text"
-              placeholder="time"
-              value={duration}
-              onChange={(e) => setDuration(e.target.value)}
-            />
-          </div>
-          <label className="label text-left pl-1">last registation Date </label>
-          <div>
-            <input
-              className="inputBox1"
-              type="date"
+              type="Datetime-local"
               placeholder="last registation Date"
               value={lastRegistationDate}
               onChange={(e) => setLastRegistationDate(e.target.value)}

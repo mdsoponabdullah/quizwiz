@@ -18,11 +18,16 @@ const PastContest = () => {
 
     const contestsContainer = [];
     try {
-      const getRunnigContest = await getDocs(dataBaseRef);
-      getRunnigContest.forEach((doc) => {
-        const contest = { contestId: doc.id, contestData: doc.data() };
-        // console.log(doc.id, " => ", doc.data());
-        contestsContainer.push(contest);
+      const getPastContest = await getDocs(dataBaseRef);
+      getPastContest.forEach((doc) => {
+        var todayTime = new Date().getTime();
+
+        var endTime = new Date(doc.data().endDate).getTime();
+        if (todayTime > endTime) {
+          const contest = { contestId: doc.id, contestData: doc.data() };
+          console.log(doc.id, " => ", doc.data());
+          contestsContainer.push(contest);
+        }
       });
       console.log("sopon", contestsContainer);
     } catch (error) {
@@ -38,12 +43,12 @@ const PastContest = () => {
   return (
     <div className="m-5">
       <h1 className="text-base ml-5 tracking-widest font-semibold">
-      Past Contest 
+        Past Contest
       </h1>
       <div className=" bg-regal-blue p-5 rounded-2xl ">
         <ul className="list-decimal text-sm font-semibold ">
-          {contests.slice(0, showAll ? contests.length : 1).map((contest) => (
-            <Link href={"/pages/runningContest/" + contest.contestId}>
+          {contests.slice(0, showAll ? contests.length : 6).map((contest) => (
+            <Link href={"/pages/PastContest/" + contest.contestId}>
               <li key={contest.contestId} className="ml-3">
                 {contest.contestData.contestTitle}
               </li>
@@ -52,13 +57,19 @@ const PastContest = () => {
         </ul>
 
         {!showAll && (
-          <span className="text-blue text-sm cursor-pointer " onClick={handleClick}>
+          <span
+            className="text-blue text-sm cursor-pointer "
+            onClick={handleClick}
+          >
             See more.....
           </span>
         )}
 
         {showAll && (
-          <span className="text-blue text-sm cursor-pointer  " onClick={handleClick}>
+          <span
+            className="text-blue text-sm cursor-pointer  "
+            onClick={handleClick}
+          >
             Hide
           </span>
         )}

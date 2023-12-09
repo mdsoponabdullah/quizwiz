@@ -18,11 +18,16 @@ const UpcomingContest = () => {
 
     const contestsContainer = [];
     try {
-      const getRunnigContest = await getDocs(dataBaseRef);
-      getRunnigContest.forEach((doc) => {
-        const contest = { contestId: doc.id, contestData: doc.data() };
-
-        contestsContainer.push(contest);
+      const getUpcomingContest = await getDocs(dataBaseRef);
+      getUpcomingContest.forEach((doc) => {
+        var todayTime = new Date().getTime();
+        var startTime = new Date(doc.data().startDate).getTime();
+        
+        if (todayTime < startTime) {
+          const contest = { contestId: doc.id, contestData: doc.data() };
+          console.log(doc.id, " => ", doc.data());
+          contestsContainer.push(contest);
+        }
       });
       console.log("sopon", contestsContainer);
     } catch (error) {
@@ -43,7 +48,7 @@ const UpcomingContest = () => {
       <div className=" bg-regal-blue p-5 rounded-2xl ">
         <ul className="list-decimal text-sm font-semibold ">
           {contests.slice(0, showAll ? contests.length : 2).map((contest) => (
-            <Link href={"/pages/runningContest/" + contest.contestId}>
+            <Link href={"/pages/Upcomingcontest/" + contest.contestId}>
               <li key={contest.contestId} className="ml-3">
                 {contest.contestData.contestTitle}
               </li>

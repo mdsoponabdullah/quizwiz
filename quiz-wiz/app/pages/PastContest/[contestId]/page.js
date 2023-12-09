@@ -14,6 +14,8 @@ const page = ({ params }) => {
   const [countWrongAns, setCountWrongAns] = useState(0);
   const [numberOfQuestion, setNumberOfQuestion] = useState(0);
   const [submited, setSubmited] = useState(false);
+  const [timer, setTimer] = useState(45);
+  const [countSecond, setCountSecond] = useState(60);
 
   const [questionNumberOfWrongAns, setQuestionNumberOfWrongAns] = useState([]);
   const correct = new Set();
@@ -37,8 +39,35 @@ const page = ({ params }) => {
 
   useEffect(() => {
     getContest();
-    if (contest) console.log(contest);
   }, []);
+
+  var getTimer = async () => {
+    var date1 = new Date(contest.startDate).getTime();
+    var date2 = new Date(contest.endDate).getTime();
+    var date = new Date().getTime();
+    var duration;
+    
+     duration = (date2 - date1) / 60 / 1000;
+    setTimer(duration);
+
+    var second = countSecond;
+    setInterval(() => {
+      setCountSecond(second--);
+      if (second == 0) {
+        if (duration == 0 && second == 0||duration<0) submitTheContest();
+        setTimer(--duration);
+        second = 60;
+      }
+    }, 1000);
+  };
+
+  useEffect(() => {
+    if (contest) {
+      console.log(contest);
+
+      getTimer();
+    }
+  }, [contest]);
   useEffect(() => {
     if (contest) {
       setSetsOfmcq(contest.setsOfmcq);
@@ -119,6 +148,13 @@ const page = ({ params }) => {
               )}
             </h1>
             <h1 className="text-base text-center font-bold tracking-wide text-blue">
+              {contest.startDate && (
+                <span className="text-[#000111] font-semibold">
+                  Contest endDate: {contest.endDate}
+                </span>
+              )}
+            </h1>
+            <h1 className="text-base text-center font-bold tracking-wide text-blue">
               {contest.startTime && (
                 <span className="text-[#000111] font-semibold">
                   Contest startTime: {contest.startTime}
@@ -139,6 +175,15 @@ const page = ({ params }) => {
                 </span>
               )}
             </h1>
+            <h1 className="text-base text-center font-bold tracking-wide">
+              remaining :{" "}
+              {isNaN(timer) == false && (
+                <span className="text-[#000111] font-semibold">
+                  {" "}
+                  {parseInt(timer) + ":" + countSecond}
+                </span>
+              )}
+            </h1>
           </div>
 
           <div>
@@ -154,6 +199,15 @@ const page = ({ params }) => {
                         <p className="text-gray-600">
                           {question.questionDescription}
                         </p>
+                        <div>
+                          {question.imageUrl && (
+                            <img
+                              alt="loading"
+                              src={question.imageUrl}
+                              className="m-auto right-4"
+                            />
+                          )}
+                        </div>
                       </div>
 
                       <ol className="pl-6 mt-2">
@@ -170,7 +224,7 @@ const page = ({ params }) => {
                               );
                             }}
                           />
-                          <span className="pb-5"> a. {question.a}</span>
+                          <span className="pb-5"> {question.a}</span>
                         </li>
                         <li>
                           <input
@@ -185,7 +239,7 @@ const page = ({ params }) => {
                               );
                             }}
                           />
-                          <span className="pb-5"> b. {question.b}</span>
+                          <span className="pb-5"> {question.b}</span>
                         </li>
                         <li>
                           <input
@@ -200,7 +254,7 @@ const page = ({ params }) => {
                               );
                             }}
                           />
-                          <span className="pb-5"> c. {question.c}</span>
+                          <span className="pb-5"> {question.c}</span>
                         </li>
                         <li>
                           <input
@@ -215,7 +269,7 @@ const page = ({ params }) => {
                               );
                             }}
                           />
-                          <span className="pb-5"> d. {question.d}</span>
+                          <span className="pb-5"> {question.d}</span>
                         </li>
                       </ol>
                       {/* <div className="mt-2 text-sm text-gray-500">

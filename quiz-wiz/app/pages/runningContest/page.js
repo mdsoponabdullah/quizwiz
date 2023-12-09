@@ -15,38 +15,16 @@ const runningcontest = () => {
 
   const getContest = async () => {
     const dataBaseRef = collection(database, "contest");
-    var today = new Date();
 
     const contestsContainer = [];
     try {
       const getRunnigContest = await getDocs(dataBaseRef);
 
       getRunnigContest.forEach((doc) => {
-        var contestDate = new Date(Date.parse(doc.data().startDate));
-
-        // Example string representing time
-        var timeString = "03:43";
-
-        // Extracting hour and minute using substring
-        var hour = timeString.substring(0, 2);
-        var minute = timeString.substring(3);
-
-        console.log(doc.data().startTime);
-        console.log(
-          +hour,
-          today.getHours(),
-          +minute,
-          today.getMinutes(),
-          doc.data().duration
-        );
-
-        if (
-          (today.getFullYear() == contestDate.getFullYear() &&
-            today.getMonth() == contestDate.getMonth() &&
-            today.getDay() == contestDate.getDay() &&
-            +hour <= today.getHours(),
-          +minute <= today.getMinutes())
-        ) {
+        var todayTime = new Date().getTime();
+        var startTime = new Date(doc.data().startDate).getTime();
+        var endTime = new Date(doc.data().endDate).getTime();
+        if (todayTime >= startTime && todayTime <= endTime) {
           const contest = { contestId: doc.id, contestData: doc.data() };
           console.log(doc.id, " => ", doc.data());
           contestsContainer.push(contest);
