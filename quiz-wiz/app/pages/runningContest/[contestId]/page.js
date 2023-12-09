@@ -14,6 +14,8 @@ const page = ({ params }) => {
   const [countWrongAns, setCountWrongAns] = useState(0);
   const [numberOfQuestion, setNumberOfQuestion] = useState(0);
   const [submited, setSubmited] = useState(false);
+  const [timer, setTimer] = useState(45);
+  const [countSecond, setCountSecond] = useState(60);
 
   const [questionNumberOfWrongAns, setQuestionNumberOfWrongAns] = useState([]);
   const correct = new Set();
@@ -37,8 +39,30 @@ const page = ({ params }) => {
 
   useEffect(() => {
     getContest();
-    if (contest) console.log(contest);
   }, []);
+
+  var getTimer = async() => {
+    var duration = contest.duration;
+   
+    var second = countSecond;
+    setInterval(() => {
+      setCountSecond(second--);
+      if (second == 0) {
+        if (duration == 0 && second==0) submitTheContest();
+        setTimer(--duration);
+        second = 60;
+       
+      }
+    }, 1000);
+  };
+
+  useEffect(() => {
+    if (contest) {
+      console.log(contest);
+      setTimer(--contest.duration)
+      getTimer();
+    }
+  }, [contest]);
   useEffect(() => {
     if (contest) {
       setSetsOfmcq(contest.setsOfmcq);
@@ -139,6 +163,15 @@ const page = ({ params }) => {
                 </span>
               )}
             </h1>
+            <h1 className="text-base text-center font-bold tracking-wide">
+              remaining :{" "}
+              {isNaN(timer) == false && (
+                <span className="text-[#000111] font-semibold">
+                  {" "}
+                  {timer + ":" + countSecond}
+                </span>
+              )}
+            </h1>
           </div>
 
           <div>
@@ -155,11 +188,11 @@ const page = ({ params }) => {
                           {question.questionDescription}
                         </p>
                         <div>
-                          {question.imgUrl && (
+                          {question.imageUrl && (
                             <img
                               alt="loading"
-                              src={question.imgUrl}
-                              className="w-[200px] h-[200px] rounded-full ring-4  m-auto right-4"
+                              src={question.imageUrl}
+                              className="m-auto right-4"
                             />
                           )}
                         </div>
@@ -179,7 +212,7 @@ const page = ({ params }) => {
                               );
                             }}
                           />
-                          <span className="pb-5"> a. {question.a}</span>
+                          <span className="pb-5"> {question.a}</span>
                         </li>
                         <li>
                           <input
@@ -194,7 +227,7 @@ const page = ({ params }) => {
                               );
                             }}
                           />
-                          <span className="pb-5"> b. {question.b}</span>
+                          <span className="pb-5"> {question.b}</span>
                         </li>
                         <li>
                           <input
@@ -209,7 +242,7 @@ const page = ({ params }) => {
                               );
                             }}
                           />
-                          <span className="pb-5"> c. {question.c}</span>
+                          <span className="pb-5"> {question.c}</span>
                         </li>
                         <li>
                           <input
@@ -224,7 +257,7 @@ const page = ({ params }) => {
                               );
                             }}
                           />
-                          <span className="pb-5"> d. {question.d}</span>
+                          <span className="pb-5"> {question.d}</span>
                         </li>
                       </ol>
                       {/* <div className="mt-2 text-sm text-gray-500">

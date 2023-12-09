@@ -14,13 +14,15 @@ const page = () => {
   const [questionNumber, setQuestionNumber] = useState(1);
   const [questionDescription, setQuestionDescription] = useState("");
   const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+
   const [lastRegistationDate, setLastRegistationDate] = useState("");
   const [duration, setDuration] = useState(0);
   const [startTime, setStartTime] = useState("");
-  const [a, setA] = useState("");
-  const [b, setB] = useState("");
-  const [c, setC] = useState("");
-  const [d, setD] = useState("");
+  const [a, setA] = useState("a. ");
+  const [b, setB] = useState("b. ");
+  const [c, setC] = useState("c. ");
+  const [d, setD] = useState("d. ");
 
   const [correctAns, setCorrectAns] = useState("");
   const [questionImage, setQuestionImage] = useState(null);
@@ -63,10 +65,10 @@ const page = () => {
 
     console.log("sopon");
     setSetsOfmcq([...setsOfmcq, question]);
-    setA("");
-    setB("");
-    setC("");
-    setD("");
+    setA("a. ");
+    setB("b. ");
+    setC("c. ");
+    setD("d. ");
     setCorrectAns("");
     setQuestionDescription("");
     setQuestionImage(null);
@@ -170,6 +172,14 @@ const page = () => {
               onChange={(e) => setStartTime(e.target.value)}
             />
           </div>
+          <div>
+            <input
+              type="datetime-local"
+              className="inputBox1"
+              placeholder="start Time & Date"
+             
+            />
+          </div>
           <label className="label text-left pl-1">duration </label>
           <div>
             <input
@@ -207,6 +217,15 @@ const page = () => {
             />
           </div>
           <UploadQuestionimage setQuestionImage={setQuestionImage} />
+          <div>
+            {questionImage && (
+              <img
+                alt={"Profile Photo"}
+                src={questionImage}
+                className="m-auto right-4 overflow-hidden"
+              />
+            )}
+          </div>
         </div>
         <form className="space-y-3" onSubmit={addQuestion}>
           <div className=" text-center">
@@ -253,10 +272,10 @@ const page = () => {
                 value={correctAns}
               >
                 <option>select correct Answer</option>
-                <option value={a}>a {a}</option>
-                <option value={b}>b {b}</option>
-                <option value={c}>c {c}</option>
-                <option value={d}>d {d}</option>
+                <option value={a}>{a}</option>
+                <option value={b}>{b}</option>
+                <option value={c}>{c}</option>
+                <option value={d}>{d}</option>
               </select>
             </div>
           </div>
@@ -332,10 +351,10 @@ const page = () => {
                   </div>
 
                   <ol className="pl-6 mt-2">
-                    <li>a. {question.a}</li>
-                    <li>b. {question.b}</li>
-                    <li>c. {question.c}</li>
-                    <li>d. {question.d}</li>
+                    <li> {question.a}</li>
+                    <li> {question.b}</li>
+                    <li> {question.c}</li>
+                    <li> {question.d}</li>
                   </ol>
                   <div className="mt-2 text-sm text-gray-500">
                     Correct Answer: {question.correctAns}
