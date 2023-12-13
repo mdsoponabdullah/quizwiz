@@ -4,6 +4,7 @@ import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { database } from "../../../firebase";
 import { UserAuth } from "../../../context/AuthContext";
+import CountdownTimer from "../../../component/countDownTimer";
 
 const page = ({ params }) => {
   const { user, userData } = UserAuth();
@@ -16,8 +17,9 @@ const page = ({ params }) => {
   const [submited, setSubmited] = useState(false);
   const [timer, setTimer] = useState(45);
   const [countSecond, setCountSecond] = useState(60);
-  const [countDown, setcountDown] = useState("");
-
+  const [startDate, setStartDate] = useState(
+    new Date("2023-12-10T01:15").getTime()
+  );
   const [questionNumberOfWrongAns, setQuestionNumberOfWrongAns] = useState([]);
   const correct = new Set();
   const wrong = new Set();
@@ -44,6 +46,7 @@ const page = ({ params }) => {
 
   var getTimer = async () => {
     var date1 = new Date(contest.startDate).getTime();
+    setStartDate(date1);
     var date2 = new Date(contest.endDate).getTime();
     var date = new Date().getTime();
     var duration;
@@ -55,37 +58,11 @@ const page = ({ params }) => {
     setInterval(() => {
       setCountSecond(second--);
       if (second == 0) {
-        if ((duration == 0 && second == 0) || duration < 0) submitTheContest();
+        if ((duration <= 0 && second == 0) || duration < 0) submitTheContest();
         setTimer(--duration);
         second = 60;
       }
     }, 1000);
-
-    /////////////////////////////////
-
-    // Update the count down every 1 second
-    var x = setInterval(function () {
-      date = new Date().getTime();
-      // Find the distance between now and the count down date
-      var distance = date2 - date;
-
-      // Time calculations for days, hours, minutes and seconds
-      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      var hours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      // Output the result in an element with id="demo"
-      setcountDown(
-        days + "d " + hours + "h " + minutes + "m " + seconds + "s "
-      );
-
-      // document.getElementById("demo").innerHTML = countDown1;
-    }, 1000);
-
-    /////////////////////////////////
   };
 
   useEffect(() => {
@@ -155,214 +132,215 @@ const page = ({ params }) => {
   };
 
   return (
-    <div>
-      {" "}
-      {new Date(contest.startDate).getTime() <= new Date().getTime() ? (
-        <div>
-          {!submited && (
-            <div className="mt-10 p-8 text-base m-auto w-1/2 border-5 rounder-lg shadow-sm bg-regal-blue">
-              <div className="p-2">
-                <h1 className="heading  text-blue">Contest</h1>
-                <h1 className="text-base text-center font-bold tracking-wide text-blue">
-                  {contest.contestTitle && (
-                    <span className="text-[#000111] font-semibold">
-                      Contest title: {contest.contestTitle}
-                    </span>
-                  )}
-                </h1>
-                <h1 className="text-base text-center font-bold tracking-wide text-blue">
-                  {contest.startDate && (
-                    <span className="text-[#000111] font-semibold">
-                      Contest startDate: {contest.startDate}
-                    </span>
-                  )}
-                </h1>
-                <h1 className="text-base text-center font-bold tracking-wide text-blue">
-                  {contest.startDate && (
-                    <span className="text-[#000111] font-semibold">
-                      Contest endDate: {contest.endDate}
-                    </span>
-                  )}
-                </h1>
-                <h1 className="text-base text-center font-bold tracking-wide text-blue">
-                  {contest.startTime && (
-                    <span className="text-[#000111] font-semibold">
-                      Contest startTime: {contest.startTime}
-                    </span>
-                  )}
-                </h1>
-                <h1 className="text-base text-center font-bold tracking-wide text-blue">
-                  {contest.duration !== 0 && (
-                    <span className="text-[#000111] font-semibold">
-                      Contest duration: {contest.duration}
-                    </span>
-                  )}
-                </h1>
-                <h1 className="text-base text-center font-bold tracking-wide">
-                  {contest.lastRegistationDate && (
-                    <span className="text-[#000111] font-semibold">
-                      Contest lastRegistationDate: {contest.lastRegistationDate}
-                    </span>
-                  )}
-                </h1>
-                <h1 className="text-base text-center font-bold tracking-wide">
-                  remaining :{" "}
-                  {isNaN(timer) == false && (
-                    <span className="text-[#000111] font-semibold">
-                      {" "}
-                      {parseInt(timer) + ":" + countSecond}
-                    </span>
-                  )}
-                </h1>
-              </div>
+    contest.startDate && (
+      <div>
+        {new Date(contest.startDate).getTime() <= new Date().getTime() ? (
+          <div>
+            {!submited && (
+              <div className="mt-10 p-8 text-base m-auto w-1/2 border-5 rounder-lg shadow-sm bg-regal-blue">
+                <div className="p-2">
+                  <h1 className="heading  text-blue">Contest</h1>
+                  <h1 className="text-base text-center font-bold tracking-wide text-blue">
+                    {contest.contestTitle && (
+                      <span className="text-[#000111] font-semibold">
+                        Contest title: {contest.contestTitle}
+                      </span>
+                    )}
+                  </h1>
+                  <h1 className="text-base text-center font-bold tracking-wide text-blue">
+                    {contest.startDate && (
+                      <span className="text-[#000111] font-semibold">
+                        Contest startDate: {contest.startDate}
+                      </span>
+                    )}
+                  </h1>
+                  <h1 className="text-base text-center font-bold tracking-wide text-blue">
+                    {contest.startDate && (
+                      <span className="text-[#000111] font-semibold">
+                        Contest endDate: {contest.endDate}
+                      </span>
+                    )}
+                  </h1>
+                  <h1 className="text-base text-center font-bold tracking-wide text-blue">
+                    {contest.startTime && (
+                      <span className="text-[#000111] font-semibold">
+                        Contest startTime: {contest.startTime}
+                      </span>
+                    )}
+                  </h1>
+                  <h1 className="text-base text-center font-bold tracking-wide text-blue">
+                    {contest.duration !== 0 && (
+                      <span className="text-[#000111] font-semibold">
+                        Contest duration: {contest.duration}
+                      </span>
+                    )}
+                  </h1>
+                  <h1 className="text-base text-center font-bold tracking-wide">
+                    {contest.lastRegistationDate && (
+                      <span className="text-[#000111] font-semibold">
+                        Contest lastRegistationDate:{" "}
+                        {contest.lastRegistationDate}
+                      </span>
+                    )}
+                  </h1>
+                  <h1 className="text-base text-center font-bold tracking-wide">
+                    remaining :{" "}
+                    {isNaN(timer) == false && (
+                      <span className="text-[#000111] font-semibold">
+                        {" "}
+                        {parseInt(timer) + ":" + countSecond}
+                      </span>
+                    )}
+                  </h1>
+                </div>
 
-              <div>
-                <div className="max-w-md mx-auto">
-                  <ul className="divide-y divide-gray-300">
-                    {setsOfmcq &&
-                      setsOfmcq.map((question) => (
-                        <li key={question.questionNumber} className="py-4">
-                          <div className="">
-                            <div className="font-semibold">
-                              Question {question.questionNumber}.
+                <div>
+                  <div className="max-w-md mx-auto">
+                    <ul className="divide-y divide-gray-300">
+                      {setsOfmcq &&
+                        setsOfmcq.map((question) => (
+                          <li key={question.questionNumber} className="py-4">
+                            <div className="">
+                              <div className="font-semibold">
+                                Question {question.questionNumber}.
+                              </div>
+                              <p className="text-gray-600">
+                                {question.questionDescription}
+                              </p>
+                              <div>
+                                {question.imageUrl && (
+                                  <img
+                                    alt="loading"
+                                    src={question.imageUrl}
+                                    className="m-auto right-4"
+                                  />
+                                )}
+                              </div>
                             </div>
-                            <p className="text-gray-600">
-                              {question.questionDescription}
-                            </p>
-                            <div>
-                              {question.imageUrl && (
-                                <img
-                                  alt="loading"
-                                  src={question.imageUrl}
-                                  className="m-auto right-4"
+
+                            <ol className="pl-6 mt-2">
+                              <li>
+                                <input
+                                  type="radio"
+                                  value={question.a}
+                                  name={question.questionNumber}
+                                  onChange={(e) => {
+                                    provideAns(
+                                      e,
+                                      question.correctAns,
+                                      question.questionNumber
+                                    );
+                                  }}
                                 />
-                              )}
-                            </div>
-                          </div>
-
-                          <ol className="pl-6 mt-2">
-                            <li>
-                              <input
-                                type="radio"
-                                value={question.a}
-                                name={question.questionNumber}
-                                onChange={(e) => {
-                                  provideAns(
-                                    e,
-                                    question.correctAns,
-                                    question.questionNumber
-                                  );
-                                }}
-                              />
-                              <span className="pb-5"> {question.a}</span>
-                            </li>
-                            <li>
-                              <input
-                                type="radio"
-                                value={question.b}
-                                name={question.questionNumber}
-                                onChange={(e) => {
-                                  provideAns(
-                                    e,
-                                    question.correctAns,
-                                    question.questionNumber
-                                  );
-                                }}
-                              />
-                              <span className="pb-5"> {question.b}</span>
-                            </li>
-                            <li>
-                              <input
-                                type="radio"
-                                value={question.c}
-                                name={question.questionNumber}
-                                onChange={(e) => {
-                                  provideAns(
-                                    e,
-                                    question.correctAns,
-                                    question.questionNumber
-                                  );
-                                }}
-                              />
-                              <span className="pb-5"> {question.c}</span>
-                            </li>
-                            <li>
-                              <input
-                                type="radio"
-                                value={question.d}
-                                name={question.questionNumber}
-                                onChange={(e) => {
-                                  provideAns(
-                                    e,
-                                    question.correctAns,
-                                    question.questionNumber
-                                  );
-                                }}
-                              />
-                              <span className="pb-5"> {question.d}</span>
-                            </li>
-                          </ol>
-                          {/* <div className="mt-2 text-sm text-gray-500">
+                                <span className="pb-5"> {question.a}</span>
+                              </li>
+                              <li>
+                                <input
+                                  type="radio"
+                                  value={question.b}
+                                  name={question.questionNumber}
+                                  onChange={(e) => {
+                                    provideAns(
+                                      e,
+                                      question.correctAns,
+                                      question.questionNumber
+                                    );
+                                  }}
+                                />
+                                <span className="pb-5"> {question.b}</span>
+                              </li>
+                              <li>
+                                <input
+                                  type="radio"
+                                  value={question.c}
+                                  name={question.questionNumber}
+                                  onChange={(e) => {
+                                    provideAns(
+                                      e,
+                                      question.correctAns,
+                                      question.questionNumber
+                                    );
+                                  }}
+                                />
+                                <span className="pb-5"> {question.c}</span>
+                              </li>
+                              <li>
+                                <input
+                                  type="radio"
+                                  value={question.d}
+                                  name={question.questionNumber}
+                                  onChange={(e) => {
+                                    provideAns(
+                                      e,
+                                      question.correctAns,
+                                      question.questionNumber
+                                    );
+                                  }}
+                                />
+                                <span className="pb-5"> {question.d}</span>
+                              </li>
+                            </ol>
+                            {/* <div className="mt-2 text-sm text-gray-500">
                       Correct Answer: {question.correctAns}
                     </div> */}
-                        </li>
-                      ))}
-                  </ul>
-                </div>
-                <div className="m-auto text-center">
-                  <form onSubmit={submitTheContest}>
-                    <input
-                      type="submit"
-                      className="btn-blue text-lg text-[#ffffff] text-center"
-                      value="submit"
-                    />
-                  </form>
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
+                  <div className="m-auto text-center">
+                    <form onSubmit={submitTheContest}>
+                      <input
+                        type="submit"
+                        className="btn-blue text-lg text-[#ffffff] text-center"
+                        value="submit"
+                      />
+                    </form>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
-          {submited && (
-            <div className="mt-10 p-8 text-base m-auto w-1/2 border-5 rounder-lg shadow-sm bg-regal-blue">
-              <h1 className="heading  text-blue">Result</h1>
-              <h1 className="text-base text-center font-bold tracking-wide text-blue">
-                {
-                  <span className="text-[#000111] font-semibold">
-                    Number Of Question: {numberOfQuestion}
-                  </span>
-                }
-              </h1>
-              <h1 className="text-base text-center font-bold tracking-wide text-blue">
-                {
-                  <span className="text-[#000111] font-semibold">
-                    Correct Answer: {countCorectAns}
-                  </span>
-                }
-              </h1>
-              <h1 className="text-base text-center font-bold tracking-wide text-blue">
-                {
-                  <span className="text-[#000111] font-semibold">
-                    Wrong answer: {countWrongAns}
-                  </span>
-                }
-              </h1>
-              <h1 className="text-base text-center font-bold tracking-wide text-blue">
-                {
-                  <span className="text-[#000111] font-semibold">
-                    Not Answered:
-                    {numberOfQuestion - countWrongAns - countCorectAns}
-                  </span>
-                }
-              </h1>
-            </div>
-          )}
-        </div>
-      ) : (
-        <div className="text-9xl bg-center">
-          {" "}
-          {countDown !=null && <div>{countDown}</div>}
-        </div>
-      )}
-    </div>
+            )}
+            {submited && (
+              <div className="mt-10 p-8 text-base m-auto w-1/2 border-5 rounder-lg shadow-sm bg-regal-blue">
+                <h1 className="heading  text-blue">Result</h1>
+                <h1 className="text-base text-center font-bold tracking-wide text-blue">
+                  {
+                    <span className="text-[#000111] font-semibold">
+                      Number Of Question: {numberOfQuestion}
+                    </span>
+                  }
+                </h1>
+                <h1 className="text-base text-center font-bold tracking-wide text-blue">
+                  {
+                    <span className="text-[#000111] font-semibold">
+                      Correct Answer: {countCorectAns}
+                    </span>
+                  }
+                </h1>
+                <h1 className="text-base text-center font-bold tracking-wide text-blue">
+                  {
+                    <span className="text-[#000111] font-semibold">
+                      Wrong answer: {countWrongAns}
+                    </span>
+                  }
+                </h1>
+                <h1 className="text-base text-center font-bold tracking-wide text-blue">
+                  {
+                    <span className="text-[#000111] font-semibold">
+                      Not Answered:
+                      {numberOfQuestion - countWrongAns - countCorectAns}
+                    </span>
+                  }
+                </h1>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="text-9xl text-blue text-center mt-60 p-8 text-base  m-auto w-1/2 border-5 rounder-lg shadow-sm">
+            <CountdownTimer startDate={new Date(contest.startDate).getTime()} />
+          </div>
+        )}
+      </div>
+    )
   );
 };
 
