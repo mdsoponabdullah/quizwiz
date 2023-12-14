@@ -27,7 +27,6 @@ export default function RootLayout({
           <div>{children}</div>
         </AuthContextProvider>
         <div className="">
-          {" "}
           <Footer />
         </div>
       </body>
