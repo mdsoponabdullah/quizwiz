@@ -17,10 +17,23 @@ const Page = () => {
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [profesion, setProfesion] = useState("");
   const [discription, setDiscription] = useState("");
-  const { user } = UserAuth();
   const [loding, setLoading] = useState(true);
   const [check, setCheck] = useState(false);
   const router = useRouter();
+  const { user, userData } = UserAuth();
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (!user) {
+        router.push("/pages/login");
+      }
+      else if (userData) {
+        console.log(userData)
+        router.push("/pages/profile");
+
+      }
+    }, 1000);
+    return () => clearTimeout(timeoutId);
+  }, [user]);
 
   const getUserInfo = async () => {
     if (user) {
@@ -61,25 +74,28 @@ const Page = () => {
       joinDate: date.toDateString(),
     };
 
-    if (user)
-      await setDoc(doc(database, "users", user.uid), data)
-        .then(() => {
-          alert("Data are added");
-          router.push("/pages/profile");
-          setFirstName("");
-          setLastName("");
-          setContacNumber("");
-          setParmanentAddress("");
-          setCurrentAddress("");
-          setGender("");
-          setEmail("");
-          setDateOfBirth("");
-          setProfesion("");
-          setDiscription("");
-        })
+    if (user) {
+      await setDoc(doc(database, "users", user.uid), data).then(() => {
+        alert("Data are added");
+        router.push("/pages/profile");
+        setFirstName("");
+        setLastName("");
+        setContacNumber("");
+        setParmanentAddress("");
+        setCurrentAddress("");
+        setGender("");
+        setEmail("");
+        setDateOfBirth("");
+        setProfesion("");
+        setDiscription("");
+      })
         .catch((error) => {
           console.error(error);
         });
+
+    }
+
+
   };
 
   // if (check)

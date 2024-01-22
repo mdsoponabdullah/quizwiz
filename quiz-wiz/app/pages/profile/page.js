@@ -7,12 +7,30 @@ import Loading from "../../component/loading";
 import UploadImage from "../../component/uploadprofileimage";
 import ContestStatitics from "../../component/contestStatistics";
 import BarChart from "../../component/BarChart";
+import { useRouter } from "next/navigation";
 
 import Link from "next/link";
 
 const Page = () => {
   const { user, userData } = UserAuth();
   const [loding, setLoading] = useState(true);
+
+  const router = useRouter();
+
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (!user) router.push("/pages/login");
+
+      else if (!userData) {
+        router.push("/pages/insertInformation");
+
+      }
+
+    }, 1000);
+    return () => clearTimeout(timeoutId);
+  }, []);
+
 
   const [skill, setSkill] = useState("");
 

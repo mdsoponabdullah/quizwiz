@@ -11,37 +11,37 @@ import { auth } from "../../firebase";
 import { useRouter } from "next/navigation";
 
 const Login = () => {
-  const { user, googleSignIn } = UserAuth();
+  const { user,userData, googleSignIn } = UserAuth();
   const router = useRouter();
-  if (user) {
-    router.push("/pages/profile");
-    localStorage.setItem("login", "true");
-  }
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  if (user) {
+    router.push("/pages/profile");
+    
+  }
   const signInHandler = async () => {
     if (email == "" || password == "") return;
     try {
       const user = await signInWithEmailAndPassword(auth, email, password);
-      localStorage.setItem("login", "true");
+     
     } catch (error) {
       console.error("error Ocured", error);
     }
   };
 
   const singnInwithGoogle = async () => {
-    {
-      localStorage.setItem("name", "sopon");
-    }
+   
     try {
       const ususerCredentialer = await googleSignIn();
 
-      localStorage.setItem("login", "true");
+    
     } catch (error) {}
     console.log(user);
   };
+
+
+
   return (
     <div className="bg-white p-20  mx-20">
       <h1 className="heading">Sign In</h1>

@@ -44,15 +44,15 @@ const Navigation = () => {
       <div className="float-right">
         <ul className="flex  text-[#ffffff] space-x-4 space-y-0 ">
           <li className="">
-            <Link className="btn-blue" href="/pages/quiz">
+            <Link className="btn-blue" href="/">
               contest
             </Link>
           </li>
 
           <li className="">
-            <Link className="btn-blue" href="/pages/createcontest">
+            { user && <Link className="btn-blue" href="/pages/createcontest">
               Create
-            </Link>
+            </Link>}
           </li>
           <li>
             <Btn title="about" url="/pages/about" />

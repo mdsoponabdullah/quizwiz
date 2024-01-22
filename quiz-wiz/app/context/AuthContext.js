@@ -10,12 +10,13 @@ import {
 
 import { auth, database } from "../firebase";
 import { getDoc, doc } from "firebase/firestore";
+import { Router } from "next/router";
 
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [userData, setUserData] = useState();
+  const [userData, setUserData] = useState(null);
 
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
@@ -24,6 +25,7 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   const LogOut = () => {
+    setUserData(null)
     signOut(auth);
   };
 
@@ -47,6 +49,9 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     getUserInfo();
   }, [user]);
+
+
+ 
 
   return (
     <AuthContext.Provider value={{ user, googleSignIn, LogOut, userData }}>

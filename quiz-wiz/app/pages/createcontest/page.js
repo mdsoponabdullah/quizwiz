@@ -7,6 +7,7 @@ import { UserAuth } from "../../context/AuthContext";
 import { collection, addDoc } from "firebase/firestore";
 import { database } from "../../firebase";
 import UploadQuestionimage from "../../component/uploloadQusetionImage";
+import { useRouter } from "next/navigation";
 
 const page = () => {
   const [contestTitle, setContestTitle] = useState("");
@@ -29,6 +30,19 @@ const page = () => {
   const [popUp, setPopUp] = useState(false);
 
   const { user } = UserAuth();
+  const router = useRouter()
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (!user) {
+        router.push("/pages/login");
+      }
+     
+    }, 1000);
+    return () => clearTimeout(timeoutId);
+  }, []);
+
+
+
   useEffect(() => {
     if (user) {
       setContestCreator(user.uid);
@@ -47,7 +61,7 @@ const page = () => {
 
   const [contest, setContest] = useState({});
 
-  useEffect(() => {}, [setsOfmcq]);
+  useEffect(() => { }, [setsOfmcq]);
 
   const addQuestion = (e) => {
     e.preventDefault();
@@ -175,7 +189,7 @@ const page = () => {
             />
           </div>
 
-       
+
           <label className="label text-left pl-1">Last Registation Date </label>
           <div>
             <input

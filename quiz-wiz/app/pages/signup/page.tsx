@@ -1,7 +1,7 @@
 // pages/login.js
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 
 import { auth } from "../../firebase";
@@ -12,10 +12,19 @@ import { useRouter } from "next/navigation";
 const Signup = () => {
   const { googleSignIn, user } = UserAuth();
   const router = useRouter();
-  if (user) {
-    router.push("/pages/profile");
-    localStorage.setItem("login", "true");
-  }
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      console.log("inside signup", user)
+      if (user) {
+
+        router.push("/pages/profile");
+      }
+
+    }, 1000);
+    return () => clearTimeout(timeoutId);
+  }, [user]);
+
 
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
