@@ -76,7 +76,7 @@ const Page = () => {
 
   if (userData)
     return (
-      <div className="overflow-hidden mt-10">
+      <div className="overflow-hidden mt-10 mx-16">
         <div className=" container mx-auto my-5 p-5 bg-[#e2e2f0] h-[700px]">
           <div className="md:flex no-wrap md:-mx-2 ">
             {/* Left Side */}

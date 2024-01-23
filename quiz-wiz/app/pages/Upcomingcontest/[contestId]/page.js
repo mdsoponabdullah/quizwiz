@@ -8,21 +8,59 @@ import CountdownTimer from "../../../component/countDownTimer";
 
 const page = ({ params }) => {
   const { user, userData } = UserAuth();
-
   const [contest, setContest] = useState({});
   const [setsOfmcq, setSetsOfmcq] = useState([]);
-  const [countCorectAns, setCountCorectAns] = useState(0);
-  const [countWrongAns, setCountWrongAns] = useState(0);
   const [numberOfQuestion, setNumberOfQuestion] = useState(0);
   const [submited, setSubmited] = useState(false);
   const [timer, setTimer] = useState(45);
   const [countSecond, setCountSecond] = useState(60);
+  const [setsOfCorrectAnswer, setSetsOfCorrectAnswer] = useState([]);
+  const [setsOfWrongAnswer, setSetsOfWrongAnswer] = useState([]);
+
   const [startDate, setStartDate] = useState(
     new Date("2023-12-10T01:15").getTime()
   );
-  const [questionNumberOfWrongAns, setQuestionNumberOfWrongAns] = useState([]);
-  const correct = new Set();
-  const wrong = new Set();
+
+  const addToSet = (element, x) => {
+    if (x == 1)
+      setSetsOfCorrectAnswer((prevSet) => [...new Set([...prevSet, element])]);
+    else setSetsOfWrongAnswer((prevSet) => [...new Set([...prevSet, element])]);
+
+  };
+
+  const removeFromSet = (element, x) => {
+    if (x == 1)
+      setSetsOfCorrectAnswer((prevSet) => prevSet.filter((item) => item !== element));
+    else setSetsOfWrongAnswer((prevSet) => prevSet.filter((item) => item !== element));
+  };
+  const isElementInSet = (element, x) => {
+    if (x == 1)
+      return setsOfCorrectAnswer.includes(element);
+    else return setsOfWrongAnswer.includes(element);
+  };
+  const provideAns = (e, correctAns, questionNumber) => {
+
+    if (correctAns == e.target.value) {
+      addToSet(questionNumber, 1);
+      if (isElementInSet(questionNumber, 2)) removeFromSet(questionNumber, 2);
+    }
+    else {
+      addToSet(questionNumber, 2);
+      if (isElementInSet(questionNumber, 1)) removeFromSet(questionNumber, 1);
+    }
+    console.log(questionNumber, correctAns, e.target.value);
+
+
+
+  };
+
+
+  useEffect(() => {
+    console.log(setsOfCorrectAnswer, setsOfWrongAnswer);
+    console.log(setsOfCorrectAnswer.length, setsOfWrongAnswer.length);
+
+  }, [setsOfCorrectAnswer, setsOfWrongAnswer])
+
 
   const getContest = async () => {
     const docRef = doc(database, "contest", params.contestId);
@@ -83,11 +121,6 @@ const page = ({ params }) => {
   }, [setsOfmcq]);
 
   const submitTheContest = async () => {
-    setQuestionNumberOfWrongAns(numberOfQuestion);
-
-    setCountCorectAns(correct.size);
-
-    setCountWrongAns(wrong.size);
 
     setSubmited(true);
     const virtualContestStatistics = [...userData.virtualContestStatistics];
@@ -95,10 +128,10 @@ const page = ({ params }) => {
     const obj = {
       contestTitle: contest.contestTitle,
       date: new Date().toDateString(),
-      score: (correct.size / numberOfQuestion) * 100,
+      score: (setsOfCorrectAnswer.length / numberOfQuestion) * 100,
       numberOfQuestion: numberOfQuestion,
-      correctAns: correct.size,
-      wrongAns: wrong.size,
+      correctAns: setsOfCorrectAnswer.length,
+      wrongAns: setsOfWrongAnswer.length,
     };
     console.log("befor", virtualContestStatistics);
     virtualContestStatistics.push(obj);
@@ -107,29 +140,11 @@ const page = ({ params }) => {
     await updateDoc(doc(database, "users", user.uid), {
       virtualContestStatistics: virtualContestStatistics,
     }).then(() => {
-      alert("push data into database");
+      //alert("push data into database");
     });
     console.log("sumited from constesid", virtualContestStatistics);
   };
 
-  const provideAns = (e, correctAns, questionNumber) => {
-    var c = false;
-    var w = false;
-    if (e.target.value == correctAns) {
-      correct.add(e.target.value);
-      c = true;
-    } else {
-      wrong.add(questionNumber);
-      w = true;
-    }
-    if (correct.has(correctAns) && wrong.has(questionNumber) && c)
-      wrong.delete(questionNumber);
-    if (correct.has(correctAns) && wrong.has(questionNumber) && w)
-      correct.delete(correctAns);
-
-    // setCountCorectAns(correct.size);
-    // setCountWrongAns(wrong.size);
-  };
 
   return (
     contest.startDate && (
@@ -300,7 +315,7 @@ const page = ({ params }) => {
               </div>
             )}
             {submited && (
-              <div className="mt-10 p-8 text-base m-auto w-1/2 border-5 rounder-lg shadow-sm bg-regal-blue">
+              <div className="mt-10 p-8 text-base m-auto w-1/2 border-5 rounder-lg shadow-sm bg-[#E2E2F0]">
                 <h1 className="heading  text-blue">Result</h1>
                 <h1 className="text-base text-center font-bold tracking-wide text-blue">
                   {
@@ -312,22 +327,21 @@ const page = ({ params }) => {
                 <h1 className="text-base text-center font-bold tracking-wide text-blue">
                   {
                     <span className="text-[#000111] font-semibold">
-                      Correct Answer: {countCorectAns}
+                      Correct Answer: {setsOfCorrectAnswer.length}
                     </span>
                   }
                 </h1>
                 <h1 className="text-base text-center font-bold tracking-wide text-blue">
                   {
                     <span className="text-[#000111] font-semibold">
-                      Wrong answer: {countWrongAns}
+                      Wrong answer: {setsOfWrongAnswer.length}
                     </span>
                   }
                 </h1>
                 <h1 className="text-base text-center font-bold tracking-wide text-blue">
                   {
                     <span className="text-[#000111] font-semibold">
-                      Not Answered:
-                      {numberOfQuestion - countWrongAns - countCorectAns}
+                      Not Answered:{numberOfQuestion - setsOfCorrectAnswer.length - setsOfWrongAnswer.length}
                     </span>
                   }
                 </h1>
