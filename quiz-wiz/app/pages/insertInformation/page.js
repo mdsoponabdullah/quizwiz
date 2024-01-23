@@ -103,7 +103,7 @@ const Page = () => {
     <dv className="">
       <div className="flex flex-col items-center mt-20 ">
         <div className=" flex items-center justify-center bg-black bg-opacity-50 ">
-          <div className="bg-white p-8 rounded shadow-md bg-[#F3E1BD] ">
+          <div className="bg-white p-8 rounded shadow-md  bg-[#e2e2f0] ">
             <h2 className="text-lg font-semibold mb-2">Your Information</h2>
             <div className="bg-white p-3 shadow-sm rounded-sm">
               <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">

@@ -77,7 +77,7 @@ const Page = () => {
   if (userData)
     return (
       <div className="overflow-hidden mt-10">
-        <div className=" container mx-auto my-5 p-5 bg-[#F3E1BD] h-[700px]">
+        <div className=" container mx-auto my-5 p-5 bg-[#e2e2f0] h-[700px]">
           <div className="md:flex no-wrap md:-mx-2 ">
             {/* Left Side */}
             <div className="w-full md:w-3/12 md:mx-2">
@@ -104,10 +104,10 @@ const Page = () => {
                 <p className="text-sm text-gray-500 hover:text-gray-600 leading-6  text-center">
                   {userData.discription}
                 </p>
-                <div className="w-44  m-auto ">
+                {/* <div className="w-44  m-auto ">
                   <h1 className="text-left font-bold border-b w-8/13">Skill</h1>
                   <p>{skill}</p>
-                </div>
+                </div> */}
                 <ul className="bg-gray-100 text-gray-600 hover:text-gray-700  py-2 px-3 mt-3 divide-y rounded ">
                   <li className="flex items-center text-base py-3">
                     <span>Status</span>
@@ -184,45 +184,45 @@ const Page = () => {
                       />
                     </svg>
                   </span>
-                  <span className="tracking-wide ">About </span>
+                  <span className="tracking-wide text-blue  text-2xl">About </span>
                 </div>
                 <div className="text-gray-700">
                   <div className="grid md:grid-cols-2 text-sm">
                     <div className="grid grid-cols-2">
-                      <div className="px-4 py-2 font-semibold">First Name</div>
-                      <div className="px-4 py-2">{userData.firstName}</div>
+                      <div className="textStyle1">First Name</div>
+                      <div className="textStyle1">{userData.firstName}</div>
                     </div>
                     <div className="grid grid-cols-2">
-                      <div className="px-4 py-2 font-semibold">Last Name</div>
-                      <div className="px-4 py-2">{userData.lastName}</div>
+                      <div className="textStyle1">Last Name</div>
+                      <div className="textStyle1">{userData.lastName}</div>
                     </div>
                     <div className="grid grid-cols-2">
-                      <div className="px-4 py-2 font-semibold">Gender</div>
-                      <div className="px-4 py-2">{userData.gender}</div>
+                      <div className="textStyle1">Gender</div>
+                      <div className="textStyle1">{userData.gender}</div>
                     </div>
                     <div className="grid grid-cols-2">
-                      <div className="px-4 py-2 font-semibold">Contact No.</div>
-                      <div className="px-4 py-2">{userData.contactNumber}</div>
+                      <div className="textStyle1">Contact No.</div>
+                      <div className="textStyle1">{userData.contactNumber}</div>
                     </div>
                     <div className="grid grid-cols-2">
-                      <div className="px-4 py-2 font-semibold">
+                      <div className="textStyle1">
                         Current Address
                       </div>
-                      <div className="px-4 py-2">{userData.currentAddress}</div>
+                      <div className="textStyle1">{userData.currentAddress}</div>
                     </div>
                     <div className="grid grid-cols-2">
-                      <div className="px-4 py-2 font-semibold">
+                      <div className="textStyle1">
                         Permanant Address
                       </div>
-                      <div className="px-4 py-2">
+                      <div className="textStyle1">
                         {userData.parmanentAddress}
                       </div>
                     </div>
                     <div className="grid grid-cols-2">
-                      <div className="px-4 py-2 font-semibold">Email.</div>
-                      <div className="px-4 py-2">
+                      <div className="textStyle1">Email.</div>
+                      <div className="textStyle1">
                         <a
-                          className="text-blue-800"
+                          className="text-blue-800 textStyle1"
                           href="mailto:jane@example.com"
                         >
                           {userData.email}
@@ -230,8 +230,8 @@ const Page = () => {
                       </div>
                     </div>
                     <div className="grid grid-cols-2">
-                      <div className="px-4 py-2 font-semibold">Birthday</div>
-                      <div className="px-4 py-2">{userData.dateOfBirth}</div>
+                      <div className="textStyle1">Birthday</div>
+                      <div className="textStyle1">{userData.dateOfBirth}</div>
                     </div>
                   </div>
                 </div>

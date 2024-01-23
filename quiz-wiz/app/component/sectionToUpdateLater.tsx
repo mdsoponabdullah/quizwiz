@@ -5,8 +5,8 @@ const SectionToUpdateLater = () => {
       <h1 className="text-base ml-5 tracking-widest font-semibold">
         Section To Update Later
       </h1>
-      <div className="bg-regal-blue p-5 rounded-2xl ">
-        <ul  className="text-sm font-semibold ">
+      <div className="bg-[#e2e2f0] p-5 rounded-2xl ">
+        <ul className="text-sm font-semibold ">
           <li className="ml-3">1. Quiz head...</li>
           <li className="ml-3">2. CSECU Quiz...</li>
         </ul>

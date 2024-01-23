@@ -45,7 +45,7 @@ const PastContest = () => {
       <h1 className="text-base ml-5 tracking-widest font-semibold">
         Past Contest
       </h1>
-      <div className=" bg-regal-blue p-5 rounded-2xl ">
+      <div className=" bg-[#e2e2f0] p-5 rounded-2xl ">
         <ul className="list-decimal text-sm font-semibold ">
           {contests.slice(0, showAll ? contests.length : 6).map((contest) => (
             <Link href={"/pages/PastContest/" + contest.contestId}>

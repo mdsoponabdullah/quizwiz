@@ -16,7 +16,7 @@ const Navigation = () => {
     try {
       localStorage.setItem("login", "false");
       await LogOut();
-    } catch (error) {}
+    } catch (error) { }
   };
 
   // page purapuri hoyar por user login/logout check korar jonno
@@ -30,7 +30,7 @@ const Navigation = () => {
   }, []); //user
 
   return (
-    <div style={{ paddingTop: "20px" }} className="px-14 flex-2 pt-6">
+    <div style={{ paddingTop: "20px" }} className="px-14 flex-2 pt-6 bg-blue h-20 ">
       <div className="float-left">
         <Link className="" href="/">
           <Image
@@ -41,29 +41,30 @@ const Navigation = () => {
           />
         </Link>
       </div>
-      <div className="float-right">
+      <div className="float-right text-xl">
         <ul className="flex  text-[#ffffff] space-x-4 space-y-0 ">
           <li className="">
-            <Link className="btn-blue" href="/">
+            <Link className="btn-blue text-xl " href="/">
               contest
             </Link>
           </li>
 
           <li className="">
-            { user && <Link className="btn-blue" href="/pages/createcontest">
+            {user && <Link className="btn-blue text-xl " href="/pages/createcontest">
               Create
             </Link>}
-          </li>
-          <li>
-            <Btn title="about" url="/pages/about" />
+          </li >
+          <li >
+            {/* <Btn title="about" className="text-xl" url="/pages/about" /> */}
+            <Link className="btn-blue text-xl " href="/pages/about"> about</Link>
           </li>
 
           {loding ? null : user ? (
             <>
-              <li>
+              <li className="text-xl ">
                 <span
                   onClick={logOuthandler}
-                  className="btn-blue hover:cursor-pointer"
+                  className="btn-blue hover:cursor-pointer text-xl "
                 >
                   logout
                 </span>
@@ -89,7 +90,7 @@ const Navigation = () => {
             </>
           ) : (
             <li>
-              <Link className="btn-blue" href="/pages/login">
+              <Link className="btn-blue text-xl " href="/pages/login">
                 login
               </Link>
             </li>
@@ -99,7 +100,7 @@ const Navigation = () => {
         </ul>
       </div>
     </div>
-    
+
   );
 };
 

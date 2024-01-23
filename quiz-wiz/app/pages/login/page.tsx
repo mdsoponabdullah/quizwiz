@@ -43,7 +43,7 @@ const Login = () => {
 
 
   return (
-    <div className="bg-white p-20  mx-20">
+    <div className=" bg-[#e2e2f0] p-20 mt-20 mx-80 rounded-xl ">
       <h1 className="heading">Sign In</h1>
       <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
         <div className="w-1/2 m-auto">

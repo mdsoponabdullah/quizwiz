@@ -73,7 +73,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="bg-white p-20  mx-20">
+    <div className="bg-white p-20  mx-20 bg-[#E2E2F0] mt-20 ">
       <h1 className="heading">Sign Up</h1>
       <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
         <div className="w-1/2 m-auto">

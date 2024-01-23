@@ -46,15 +46,15 @@ const page = ({ params }) => {
     var date2 = new Date(contest.endDate).getTime();
     var date = new Date().getTime();
     var duration;
-    
-     duration = (date2 - date1) / 60 / 1000;
+
+    duration = (date2 - date1) / 60 / 1000;
     setTimer(duration);
 
     var second = countSecond;
     setInterval(() => {
       setCountSecond(second--);
       if (second == 0) {
-        if (duration == 0 && second == 0||duration<0) submitTheContest();
+        if (duration == 0 && second == 0 || duration < 0) submitTheContest();
         setTimer(--duration);
         second = 60;
       }
@@ -130,7 +130,7 @@ const page = ({ params }) => {
   return (
     <div>
       {!submited && (
-        <div className="mt-10 p-8 text-base m-auto w-1/2 border-5 rounder-lg shadow-sm bg-regal-blue">
+        <div className="mt-10 p-8 text-base m-auto w-1/2 border-5 rounder-lg shadow-sm bg-[#E2E2F0]">
           <div className="p-2">
             <h1 className="heading  text-blue">Contest</h1>
             <h1 className="text-base text-center font-bold tracking-wide text-blue">
