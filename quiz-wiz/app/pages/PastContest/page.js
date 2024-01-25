@@ -48,8 +48,8 @@ const PastContest = () => {
       <div className=" bg-[#e2e2f0] p-5 rounded-2xl ">
         <ul className="list-decimal text-sm font-semibold ">
           {contests.slice(0, showAll ? contests.length : 6).map((contest) => (
-            <Link href={"/pages/PastContest/" + contest.contestId}>
-              <li key={contest.contestId} className="ml-3">
+            <Link href={"/pages/PastContest/" + contest.contestId} className="linkStyle1">
+              <li key={contest.contestId} className="ml-3  ">
                 {contest.contestData.contestTitle}
               </li>
             </Link>
@@ -58,7 +58,7 @@ const PastContest = () => {
 
         {!showAll && (
           <span
-            className="text-blue text-sm cursor-pointer "
+            className="text-blue text-base cursor-pointer "
             onClick={handleClick}
           >
             See more.....
@@ -67,7 +67,7 @@ const PastContest = () => {
 
         {showAll && (
           <span
-            className="text-blue text-sm cursor-pointer  "
+            className="text-blue text-base cursor-pointer  "
             onClick={handleClick}
           >
             Hide

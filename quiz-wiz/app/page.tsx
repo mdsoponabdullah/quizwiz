@@ -5,6 +5,7 @@ import FrequetlyAsketQuestion from "./component/frequentlyAskedQuestion";
 import SectionToUpdateLater from "./component/sectionToUpdateLater";
 import UpcomingContest from "./pages/Upcomingcontest/page";
 import QuizWizForum from "./component/quizWizForum";
+import Slider from "./component/slider"
 
 const page = () => {
   return (
@@ -29,6 +30,8 @@ const page = () => {
         </div>
         <div>
           <QuizWizForum />
+          <Slider />
+
         </div>
       </div>
     </div>

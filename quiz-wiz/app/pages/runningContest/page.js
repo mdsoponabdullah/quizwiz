@@ -50,7 +50,7 @@ const runningcontest = () => {
       <div className="bg-[#e2e2f0] p-5 rounded-2xl ">
         <ul className="list-decimal text-sm font-semibold ">
           {contests.slice(0, showAll ? contests.length : 4).map((contest) => (
-            <Link href={"/pages/runningContest/" + contest.contestId}>
+            <Link href={"/pages/runningContest/" + contest.contestId} className="linkStyle1">
               <li key={contest.contestId} className="ml-3">
                 {contest.contestData.contestTitle}
               </li>
@@ -60,7 +60,7 @@ const runningcontest = () => {
 
         {!showAll && (
           <span
-            className="text-blue text-sm cursor-pointer "
+            className="text-blue text-base cursor-pointer "
             onClick={handleClick}
           >
             See more.....
@@ -69,7 +69,7 @@ const runningcontest = () => {
 
         {showAll && (
           <span
-            className="text-blue text-sm cursor-pointer  "
+            className="text-blue text-base cursor-pointer  "
             onClick={handleClick}
           >
             Hide

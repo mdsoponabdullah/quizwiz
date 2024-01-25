@@ -22,7 +22,7 @@ const UpcomingContest = () => {
       getUpcomingContest.forEach((doc) => {
         var todayTime = new Date().getTime();
         var startTime = new Date(doc.data().startDate).getTime();
-        
+
         if (todayTime < startTime) {
           const contest = { contestId: doc.id, contestData: doc.data() };
           console.log(doc.id, " => ", doc.data());
@@ -48,7 +48,7 @@ const UpcomingContest = () => {
       <div className=" bg-[#e2e2f0] p-5 rounded-2xl ">
         <ul className="list-decimal text-sm font-semibold ">
           {contests.slice(0, showAll ? contests.length : 2).map((contest) => (
-            <Link href={"/pages/Upcomingcontest/" + contest.contestId}>
+            <Link href={"/pages/Upcomingcontest/" + contest.contestId} className="linkStyle1">
               <li key={contest.contestId} className="ml-3">
                 {contest.contestData.contestTitle}
               </li>
@@ -58,7 +58,7 @@ const UpcomingContest = () => {
 
         {!showAll && (
           <span
-            className="text-blue text-sm cursor-pointer "
+            className="text-blue text-base cursor-pointer "
             onClick={handleClick}
           >
             See more.....
@@ -67,7 +67,7 @@ const UpcomingContest = () => {
 
         {showAll && (
           <span
-            className="text-blue text-sm cursor-pointer  "
+            className="text-blue text-base cursor-pointer  "
             onClick={handleClick}
           >
             Hide
