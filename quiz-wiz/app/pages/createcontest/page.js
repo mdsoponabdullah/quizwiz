@@ -9,11 +9,13 @@ import { database } from "../../firebase";
 import UploadQuestionimage from "../../component/uploloadQusetionImage";
 import { useRouter } from "next/navigation";
 
+
 const page = () => {
   const [contestTitle, setContestTitle] = useState("");
   const [contestCreator, setContestCreator] = useState("");
   const [questionNumber, setQuestionNumber] = useState(1);
   const [questionDescription, setQuestionDescription] = useState("");
+  const [questionExplaination, setQuestionExplaination] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [lastRegistationDate, setLastRegistationDate] = useState("");
@@ -36,7 +38,7 @@ const page = () => {
       if (!user) {
         router.push("/pages/login");
       }
-     
+
     }, 1000);
     return () => clearTimeout(timeoutId);
   }, []);
@@ -65,6 +67,10 @@ const page = () => {
 
   const addQuestion = (e) => {
     e.preventDefault();
+    if (questionDescription == "") {
+      alert("Provide question DescripTion");
+      return
+    }
     const question = {
       questionNumber: questionNumber,
       questionDescription: questionDescription,
@@ -74,6 +80,7 @@ const page = () => {
       c: c,
       d: d,
       correctAns: correctAns,
+      questionExplaination: questionExplaination
     };
 
     console.log("sopon");
@@ -86,6 +93,7 @@ const page = () => {
     setQuestionDescription("");
     setQuestionImage(null);
     setQuestionNumber(questionNumber + 1);
+    setQuestionExplaination("")
 
     console.log(setsOfmcq);
   };
@@ -106,15 +114,7 @@ const page = () => {
       alert("some thing went wrong ");
       return;
     }
-    // console.log(
-    //   setsOfmcq,
-    //   contestCreator,
-    //   contestTitle,
-    //   startDate,
-    //   lastRegistationDate,
-    //   startTime,
-    //   duration
-    // );
+
 
     var date1 = new Date(startDate);
     var date2 = new Date(endDate);
@@ -150,6 +150,7 @@ const page = () => {
     setLastRegistationDate("");
     setDuration(0);
     setQuestionNumber(0);
+    router.push("/");
   };
 
   return (
@@ -162,6 +163,7 @@ const page = () => {
             <input
               className="inputBox1"
               type="text"
+              required
               placeholder="context title"
               value={contestTitle}
               onChange={(e) => setContestTitle(e.target.value)}
@@ -206,13 +208,14 @@ const page = () => {
 
         <div className="mt-20">
           <div className="mt-1">
-            <input
+            <textarea
               className="inputBox1"
+              required
               type="text"
               value={questionDescription}
               placeholder={questionNumber
                 .toString()
-                .concat(" QuestionDescription")}
+                .concat(". Question Description")}
               onChange={(e) => setQuestionDescription(e.target.value)}
             />
           </div>
@@ -230,7 +233,7 @@ const page = () => {
         <form className="space-y-3" onSubmit={addQuestion}>
           <div className=" text-center">
             <div className="mt-1">
-              <input
+              <input required
                 className="inputBox1"
                 value={a}
                 type="text"
@@ -239,7 +242,7 @@ const page = () => {
               />
             </div>
             <div className="mt-1">
-              <input
+              <input required
                 className="inputBox1"
                 value={b}
                 type="text"
@@ -248,7 +251,7 @@ const page = () => {
               />
             </div>
             <div className="mt-1">
-              <input
+              <input required
                 className="inputBox1"
                 value={c}
                 type="text"
@@ -257,7 +260,7 @@ const page = () => {
               />
             </div>
             <div className="mt-1">
-              <input
+              <input required
                 className="inputBox1"
                 value={d}
                 type="text"
@@ -265,8 +268,8 @@ const page = () => {
                 onChange={(e) => setD(e.target.value)}
               />
             </div>
-            <div>
-              <select
+            <div className="mt-1">
+              <select required
                 className="inputBox1 "
                 onChange={(e) => setCorrectAns(e.target.value)}
                 value={correctAns}
@@ -278,11 +281,20 @@ const page = () => {
                 <option value={d}>{d}</option>
               </select>
             </div>
+            <div className="mt-1">
+
+              <textarea
+                value={questionExplaination}
+                placeholder="Question Explaination"
+                onChange={(e) => setQuestionExplaination(e.target.value)}
+                className="inputBox1"
+              />
+            </div>
           </div>
           <div>
             <input
               type="submit"
-              className="btn-blue m-auto text-center px-12 font-semibold text-[#ffffff]"
+              className="btn-blue text-xl m-auto text-center px-12 font-semibold text-[#ffffff]"
               value="Add Question"
             />
           </div>
@@ -359,6 +371,10 @@ const page = () => {
                   <div className="mt-2 text-sm text-gray-500">
                     Correct Answer: {question.correctAns}
                   </div>
+                  {question.questionExplaination && <div className="mt-5">
+                    <p className="text-blue text-[17px] font-bold  "> Explaination</p>
+                    <p> {question.questionExplaination}</p>
+                  </div>}
                 </li>
               ))}
             </ul>
@@ -367,7 +383,7 @@ const page = () => {
         <form onSubmit={createContest}>
           <input
             type="submit"
-            className="btn-blue m-auto text-center px-12 font-semibold text-[#ffffff]"
+            className="btn-blue m-auto text-xl  text-center px-12 font-semibold text-[#ffffff]"
             value="create Contest"
           />
         </form>

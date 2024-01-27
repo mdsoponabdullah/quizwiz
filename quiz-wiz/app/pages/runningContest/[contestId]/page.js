@@ -4,6 +4,7 @@ import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { database } from "../../../firebase";
 import { UserAuth } from "../../../context/AuthContext";
+import Result from "../../../component/result"
 
 const page = ({ params }) => {
   const { user, userData } = UserAuth();
@@ -337,6 +338,7 @@ const page = ({ params }) => {
               </span>
             }
           </h1>
+          <Result setsOfmcq={setsOfmcq} setsOfCorrectAnswer={setsOfCorrectAnswer} setsOfWrongAnswer={setsOfWrongAnswer} />
         </div>
       )}
     </div>

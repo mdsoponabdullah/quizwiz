@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import RunningContest from "./pages/runningContest/page";
 import PastContest from "./pages/PastContest/page";

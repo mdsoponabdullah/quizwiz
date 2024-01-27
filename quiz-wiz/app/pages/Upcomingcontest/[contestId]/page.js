@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { database } from "../../../firebase";
 import { UserAuth } from "../../../context/AuthContext";
 import CountdownTimer from "../../../component/countDownTimer";
-
+import Result from "../../../component/result"
 const page = ({ params }) => {
   const { user, userData } = UserAuth();
   const [contest, setContest] = useState({});
@@ -344,7 +344,7 @@ const page = ({ params }) => {
                       Not Answered:{numberOfQuestion - setsOfCorrectAnswer.length - setsOfWrongAnswer.length}
                     </span>
                   }
-                </h1>
+                </h1><Result setsOfmcq={setsOfmcq} setsOfCorrectAnswer={setsOfCorrectAnswer} setsOfWrongAnswer={setsOfWrongAnswer} />
               </div>
             )}
           </div>

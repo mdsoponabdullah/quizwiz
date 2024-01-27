@@ -4,6 +4,7 @@ import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { database } from "../../../firebase";
 import { UserAuth } from "../../../context/AuthContext";
+import Result from "../../../component/result"
 
 const page = ({ params }) => {
   const { user, userData } = UserAuth();
@@ -15,6 +16,7 @@ const page = ({ params }) => {
   const [countSecond, setCountSecond] = useState(60);
   const [setsOfCorrectAnswer, setSetsOfCorrectAnswer] = useState([]);
   const [setsOfWrongAnswer, setSetsOfWrongAnswer] = useState([]);
+
 
   const addToSet = (element, x) => {
     if (x == 1)
@@ -53,6 +55,7 @@ const page = ({ params }) => {
   useEffect(() => {
     console.log(setsOfCorrectAnswer, setsOfWrongAnswer);
     console.log(setsOfCorrectAnswer.length, setsOfWrongAnswer.length);
+
 
   }, [setsOfCorrectAnswer, setsOfWrongAnswer])
 
@@ -127,16 +130,17 @@ const page = ({ params }) => {
       correctAns: setsOfCorrectAnswer.length,
       wrongAns: setsOfWrongAnswer.length,
     };
-    console.log("befor", virtualContestStatistics);
+
+
     virtualContestStatistics.push(obj);
-    console.log("after", virtualContestStatistics);
+
 
     await updateDoc(doc(database, "users", user.uid), {
       virtualContestStatistics: virtualContestStatistics,
     }).then(() => {
-     // alert("push data into database");
+      // alert("push data into database");
+
     });
-    console.log("sumited from constesid", virtualContestStatistics);
   };
 
 
@@ -297,7 +301,7 @@ const page = ({ params }) => {
               <form onSubmit={submitTheContest}>
                 <input
                   type="submit"
-                  className="btn-blue text-lg text-[#ffffff] text-center"
+                  className="btn-blue text-xl text-[#ffffff] text-center"
                   value="submit"
                 />
               </form>
@@ -336,7 +340,9 @@ const page = ({ params }) => {
               </span>
             }
           </h1>
+          <Result setsOfmcq={setsOfmcq} setsOfCorrectAnswer={setsOfCorrectAnswer} setsOfWrongAnswer={setsOfWrongAnswer} />
         </div>
+
       )}
 
     </div>

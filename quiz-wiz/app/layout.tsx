@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "QuizWiz",
-  description: "sopon",
+  description: "quiz wiz is best testing website of your knowledge",
 };
 
 export default function RootLayout({
