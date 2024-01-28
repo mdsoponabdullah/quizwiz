@@ -1,0 +1,16 @@
+/* styles/faq.css */
+.question {
+    cursor: pointer;
+    padding: 10px;
+    background-color: #f0f0f0;
+    margin-bottom: 5px;
+  }
+  
+  .question.active {
+    background-color: #ccc;
+  }
+  
+  .answer {
+    padding: 10px;
+    background-color: #f0f0f0;
+  }

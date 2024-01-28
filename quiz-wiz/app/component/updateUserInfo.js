@@ -58,7 +58,7 @@ const Popup = (props) => {
       {" "}
       <button
         onClick={togglePopup}
-        className="bg-blue text-sm text-[#ffffff] hover:bg-blue-700  font-semibold py-1 px-2 rounded-xl"
+        className="bg-blue text-base text-[#ffffff] hover:bg-blue-700  font-semibold py-1 px-2 rounded-xl"
       >
         Edit profile
       </button>

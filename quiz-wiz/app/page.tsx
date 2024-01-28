@@ -9,6 +9,9 @@ import QuizWizForum from "./component/quizWizForum";
 import Slider from "./component/slider"
 
 const page = () => {
+
+ 
+
   return (
     <div className="mx-8 mt-16 overflow-hidden">
       <div className="w-1/2 float-left">
@@ -19,10 +22,10 @@ const page = () => {
           <PastContest />
         </div>
         <div>
-          <FrequetlyAsketQuestion />
+          {/*  */}
         </div>
         <div>
-          <SectionToUpdateLater />
+          {/* <SectionToUpdateLater /> */}
         </div>
       </div>
       <div className="w-1/2 float-right">
@@ -30,8 +33,9 @@ const page = () => {
           <UpcomingContest />
         </div>
         <div>
-          <QuizWizForum />
-          <Slider />
+          <FrequetlyAsketQuestion />
+          {/* <QuizWizForum />
+          <Slider /> */}
 
         </div>
       </div>
