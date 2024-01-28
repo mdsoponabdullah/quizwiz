@@ -58,9 +58,9 @@ const page = () => {
 
   const getData = async () => {
     await getDocs(databaseRef)
-      .then((responce) => {
+      .then((response) => {
         setFiredata(
-          responce.docs.map((data) => {
+          response.docs.map((data) => {
             return { ...data.data(), id: data.id };
           })
         );

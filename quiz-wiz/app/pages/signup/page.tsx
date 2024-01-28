@@ -28,47 +28,47 @@ const Signup = () => {
 
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
-  const [password1, setPassword1] = useState("");
-  const [password2, setPassword2] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const signupHandler = async () => {
-    if (password1 != password2) {
-      alert("Password is not mached");
+    if (password != confirmPassword) {
+      alert("Password does not match.");
     }
-    if (email == "" || userName == "" || password1 == "" || password2 == "") {
-      alert("Please Fill all field");
+    if (email == "" || userName == "" || password == "" || confirmPassword == "") {
+      alert("All fields are required.");
       return;
     }
 
     try {
-      const ususerCredentialer = await createUserWithEmailAndPassword(
+      const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
-        password1
+        password
       );
-      console.log(ususerCredentialer);
-      await updateProfile(ususerCredentialer.user, {
+      console.log(userCredential);
+      await updateProfile(userCredential.user, {
         displayName: userName,
       });
 
       router.push("/pages/insertInformation");
     } catch (error) {
-      console.log("error occured", error);
+      console.log("There is an error.", error);
     }
   };
 
   const singnInwithGoogle = async () => {
     try {
-      const ususerCredentialer = await googleSignIn();
+      const userCredential = await googleSignIn();
       //console.log(ususerCredentialer);
-      if (ususerCredentialer) {
+      if (userCredential) {
         localStorage.setItem("login", "true");
       }
 
       router.push("/pages/profile");
     } catch (error) {
-      console.error("error occured", error);
-      alert("this email is already used");
+      console.error("There is an error.", error);
+      alert("This email already has an account.");
     }
   };
 
@@ -110,7 +110,7 @@ const Signup = () => {
             id="password"
             className="inputBox1"
             placeholder="Enter your password"
-            onChange={(e) => setPassword1(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className="w-1/2 m-auto">
@@ -122,7 +122,7 @@ const Signup = () => {
             id="password"
             className="inputBox1"
             placeholder="Enter your password"
-            onChange={(e) => setPassword2(e.target.value)}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
         <div className="flex items-center justify-center h-full">

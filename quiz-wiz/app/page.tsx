@@ -3,10 +3,7 @@ import React from "react";
 import RunningContest from "./pages/runningContest/page";
 import PastContest from "./pages/PastContest/page";
 import FrequetlyAsketQuestion from "./component/frequentlyAskedQuestion";
-import SectionToUpdateLater from "./component/sectionToUpdateLater";
 import UpcomingContest from "./pages/Upcomingcontest/page";
-import QuizWizForum from "./component/quizWizForum";
-import Slider from "./component/slider"
 
 const page = () => {
 
@@ -24,9 +21,6 @@ const page = () => {
         <div>
           {/*  */}
         </div>
-        <div>
-          {/* <SectionToUpdateLater /> */}
-        </div>
       </div>
       <div className="w-1/2 float-right">
         <div>
@@ -34,8 +28,6 @@ const page = () => {
         </div>
         <div>
           <FrequetlyAsketQuestion />
-          {/* <QuizWizForum />
-          <Slider /> */}
 
         </div>
       </div>

@@ -13,7 +13,7 @@ import Link from "next/link";
 
 const Page = () => {
   const { user, userData } = UserAuth();
-  const [loding, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const router = useRouter();
 
@@ -34,7 +34,7 @@ const Page = () => {
 
   const [skill, setSkill] = useState("");
 
-  //// page purapuri hoyar por user login/logout check korar jonno
+  //// Just to check login/logout after profile completion
 
   useEffect(() => {
     const checkAuthentication = async () => {
@@ -84,7 +84,7 @@ const Page = () => {
               {/* Profile Card */}
               <div className="bg-white p-3 border-green-400">
                 <div className="image overflow-hidden">
-                  {loding ? (
+                  {loading ? (
                     <Loading />
                   ) : (
                     <img
@@ -157,7 +157,7 @@ const Page = () => {
                         className="btn-blue"
                         href="/pages/insertInformation"
                       >
-                        Emter Your Information
+                        Enter Your Information
                       </Link>
                     )}
                   </div>

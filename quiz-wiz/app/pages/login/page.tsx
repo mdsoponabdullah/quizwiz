@@ -26,17 +26,19 @@ const Login = () => {
       const user = await signInWithEmailAndPassword(auth, email, password);
      
     } catch (error) {
-      console.error("error Ocured", error);
+      console.error("Someting went wrong.", error);
     }
   };
 
   const singnInwithGoogle = async () => {
    
     try {
-      const ususerCredentialer = await googleSignIn();
+      const userCredential = await googleSignIn();
 
     
-    } catch (error) {}
+    } catch (error) {
+      console.error("Someting went wrong.", error);
+    }
     console.log(user);
   };
 

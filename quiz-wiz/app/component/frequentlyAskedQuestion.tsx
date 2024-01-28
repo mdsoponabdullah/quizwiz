@@ -12,8 +12,10 @@ interface FAQItem {
 
 const FAQ = () => {
   const faqData: FAQItem[] = [
-    { question: 'Question 1', answer: 'Answer 1' },
-    { question: 'Question 2', answer: 'Answer 2' },
+    { question: 'What is QuizWiz?', answer: 'QuizWiz is an innovative online platform designed for quiz enthusiasts. It allows users to create and participate in quiz-based contests and engage in friendly competition.' },
+    { question: 'How can I get started on QuizWiz?', answer: 'Getting started on QuizWiz is easy! Simply create an account, explore available quizzes, or even create your own contest. Participate and enjoy the quiz experience.' },
+    {question: 'Is QuizWiz free to use?', answer: 'Yes, QuizWiz is free to use. You can sign up, participate in contests, and enjoy various features without any subscription fees.'},
+    {question: 'Is QuizWiz available on mobile devices?', answer: 'Yes, QuizWiz is designed to be accessible on both desktop and mobile devices. You can enjoy the quiz experience on your smartphone or tablet.'},
     // Add more questions and answers as needed
   ];
 
