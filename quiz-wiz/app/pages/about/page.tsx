@@ -34,7 +34,7 @@ const About = () => {
             ) : (
               <Card
                 imageSrc="/image/ramim.jpg"
-                name="Shoib uddin Ramim"
+                name="Shoaib Ramim"
                 description="Co-Founder of QuizWiz"
               />
             )}

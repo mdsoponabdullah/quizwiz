@@ -34,7 +34,7 @@ export default function ContestStatitics({
       datasets: [
         {
           backgroundColor: gradient,
-          label: "Virtual Contest Status",
+          label: "Accuracy Percentage",
           data: score,
           fill: true,
           borderWidth: 2,
@@ -58,7 +58,7 @@ export default function ContestStatitics({
 
   return (
     <div className="App">
-      <span>Virtual Contest Statistics</span>
+      <span>Contest Statistics</span>
       <canvas id="myChart" ref={canvasEl} height="100" />
     </div>
   );

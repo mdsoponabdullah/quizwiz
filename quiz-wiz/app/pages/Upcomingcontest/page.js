@@ -29,12 +29,12 @@ const UpcomingContest = () => {
           contestsContainer.push(contest);
         }
       });
-      console.log("sopon", contestsContainer);
+      console.log("", contestsContainer);
     } catch (error) {
       console.log(error);
     }
     setContests(contestsContainer);
-    console.log("noyon", contests);
+    console.log("", contests);
   };
   useEffect(() => {
     getContest();
@@ -43,7 +43,7 @@ const UpcomingContest = () => {
   return (
     <div className="m-5">
       <h1 className="text-base ml-5 tracking-widest font-semibold">
-        Upcoming Contest
+        Upcoming Contests
       </h1>
       <div className=" bg-[#e2e2f0] p-5 rounded-2xl ">
         <ul className="list-decimal text-sm font-semibold ">

@@ -68,7 +68,7 @@ const page = () => {
   const addQuestion = (e) => {
     e.preventDefault();
     if (questionDescription == "") {
-      alert("Provide question DescripTion");
+      alert("Provide Question Description");
       return
     }
     const question = {
@@ -83,7 +83,7 @@ const page = () => {
       questionExplaination: questionExplaination
     };
 
-    console.log("sopon");
+
     setSetsOfmcq([...setsOfmcq, question]);
     setA("a. ");
     setB("b. ");
@@ -111,7 +111,7 @@ const page = () => {
       !endDate.length &&
       !lastRegistationDate.length
     ) {
-      alert("some thing went wrong ");
+      alert("Something went wrong.");
       return;
     }
 
@@ -137,7 +137,7 @@ const page = () => {
     if (contestObj) {
       try {
         await addDoc(databaseRef, contestObj);
-        alert("contest are created");
+        alert("Contest is created");
       } catch (error) {
         console.log(error);
       }
@@ -372,7 +372,7 @@ const page = () => {
                     Correct Answer: {question.correctAns}
                   </div>
                   {question.questionExplaination && <div className="mt-5">
-                    <p className="text-blue text-[17px] font-bold  "> Explaination</p>
+                    <p className="text-blue text-[17px] font-bold  "> Explanation</p>
                     <p> {question.questionExplaination}</p>
                   </div>}
                 </li>

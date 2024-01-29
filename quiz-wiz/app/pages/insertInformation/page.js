@@ -37,8 +37,8 @@ const Page = () => {
 
   const getUserInfo = async () => {
     if (user) {
-      const userIfoRef = doc(database, "users", user.uid);
-      const userInfo = await getDoc(userIfoRef);
+      const userInfoRef = doc(database, "users", user.uid);
+      const userInfo = await getDoc(userInfoRef);
     }
   };
 
@@ -227,7 +227,7 @@ const Page = () => {
                         </div>
                       </div>
                       <div className="grid grid-cols-2">
-                        <div className="px-4 py-2 font-semibold">Email.</div>
+                        <div className="px-4 py-2 font-semibold">Email</div>
                         <div className="px-4 py-2">
                           <input
                             type="email"
@@ -240,7 +240,7 @@ const Page = () => {
                         </div>
                       </div>
                       <div className="grid grid-cols-2">
-                        <div className="px-4 py-2 font-semibold">Birthday</div>
+                        <div className="px-4 py-2 font-semibold">Date of Birth</div>
                         <div className="px-4 py-2">
                           {" "}
                           <input
@@ -253,7 +253,7 @@ const Page = () => {
                         </div>
                       </div>
                       <div className="grid grid-cols-2">
-                        <div className="px-4 py-2 font-semibold">Profesion</div>
+                        <div className="px-4 py-2 font-semibold">Profession</div>
                         <div className="px-4 py-2">
                           <input
                             type="text"

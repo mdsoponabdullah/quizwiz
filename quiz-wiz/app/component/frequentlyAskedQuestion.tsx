@@ -40,7 +40,7 @@ const FAQ = () => {
               >
                 {faq.question}
               </div>
-              {activeIndex === index && <div className="answer">{faq.answer}</div>}
+              {activeIndex === index && <div className="answer text-base">{faq.answer}</div>}
             </li>
           ))}
         </ul>

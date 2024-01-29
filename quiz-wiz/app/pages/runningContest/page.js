@@ -31,12 +31,12 @@ const runningcontest = () => {
         }
       });
       // let output = employees.filter(employee => employee.department == "IT");
-      console.log("sopon", contestsContainer);
+      console.log("", contestsContainer);
     } catch (error) {
       console.log(error);
     }
     setContests(contestsContainer);
-    console.log("noyon", contests);
+    console.log("", contests);
   };
   useEffect(() => {
     getContest();
@@ -45,7 +45,7 @@ const runningcontest = () => {
   return (
     <div className="m-5">
       <h1 className="text-base ml-5 tracking-widest font-semibold">
-        Running contest
+        Running Contests
       </h1>
       <div className="bg-[#e2e2f0] p-5 rounded-2xl ">
         <ul className="list-decimal text-sm font-semibold ">

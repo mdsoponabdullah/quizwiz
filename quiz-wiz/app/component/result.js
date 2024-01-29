@@ -34,7 +34,7 @@ const page = ({ setsOfCorrectAnswer, setsOfWrongAnswer, setsOfmcq }) => {
                                             </p> : setsOfWrongAnswer.includes(question.questionNumber) ? <p className="text-gray-600 text-[#e73232]">
                                                 Your Answer was Wrong
                                             </p> : <p className="text-gray-600 text-[#e73232]">
-                                                You were not Answer This Question
+                                                You did not Answer This Question
                                             </p>}
                                             <div>
                                                 {question.imageUrl && (
@@ -71,7 +71,7 @@ const page = ({ setsOfCorrectAnswer, setsOfWrongAnswer, setsOfmcq }) => {
 
                                         </ol>
                                         {question.questionExplaination && <div className="mt-5">
-                                            <p className="text-blue text-[17px] font-bold  "> Explaination</p>
+                                            <p className="text-blue text-[17px] font-bold  "> Explanation</p>
                                             <p> {question.questionExplaination}</p>
                                         </div>}
                                     </li>

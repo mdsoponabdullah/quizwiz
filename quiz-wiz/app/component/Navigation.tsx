@@ -6,7 +6,7 @@ import Btn from "./btn";
 
 const Navigation = () => {
   const { user, LogOut, userData } = UserAuth();
-  const [loding, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   if (userData) {
     console.log("inside Navigation", userData);
@@ -37,7 +37,7 @@ const Navigation = () => {
             src="/logo.png"
             width={100}
             height={0}
-            alt="Picture of the author"
+            alt="Quizwiz Logo"
           />
         </Link>
       </div>
@@ -45,7 +45,7 @@ const Navigation = () => {
         <ul className="flex  text-[#ffffff] space-x-4 space-y-0 ">
           <li className="">
             <Link className="btn-blue text-xl " href="/">
-              contest
+              Contest
             </Link>
           </li>
 
@@ -56,17 +56,17 @@ const Navigation = () => {
           </li >
           <li >
             {/* <Btn title="about" className="text-xl" url="/pages/about" /> */}
-            <Link className="btn-blue text-xl " href="/pages/about"> about</Link>
+            <Link className="btn-blue text-xl " href="/pages/about"> About Us</Link>
           </li>
 
-          {loding ? null : user ? (
+          {loading ? null : user ? (
             <>
               <li className="text-xl ">
                 <span
                   onClick={logOuthandler}
                   className="btn-blue hover:cursor-pointer text-xl "
                 >
-                  logout
+                  Logout
                 </span>
               </li>
               <li>
@@ -91,7 +91,7 @@ const Navigation = () => {
           ) : (
             <li>
               <Link className="btn-blue text-xl " href="/pages/login">
-                login
+                Login
               </Link>
             </li>
           )}

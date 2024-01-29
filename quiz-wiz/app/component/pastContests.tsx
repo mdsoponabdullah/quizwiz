@@ -3,7 +3,7 @@ const PastContest = () => {
   return (
     <div className="m-5">
       <h1 className="text-base ml-5 tracking-widest font-semibold">
-        Past contest
+        Past Contest
       </h1>
       <div className="bg-regal-blue p-5 rounded-2xl ">
         <ul className="text-sm font-semibold ">

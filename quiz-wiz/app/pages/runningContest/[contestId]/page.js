@@ -130,16 +130,16 @@ const page = ({ params }) => {
       correctAns: setsOfCorrectAnswer.length,
       wrongAns: setsOfWrongAnswer.length,
     };
-    console.log("befor", virtualContestStatistics);
+    console.log("before", virtualContestStatistics);
     virtualContestStatistics.push(obj);
     console.log("after", virtualContestStatistics);
 
     await updateDoc(doc(database, "users", user.uid), {
       virtualContestStatistics: virtualContestStatistics,
     }).then(() => {
-     alert("push data into database");
+     alert("pushed data into database");
     });
-    console.log("sumited from constesid", virtualContestStatistics);
+    console.log("submitted from constestid", virtualContestStatistics);
   };
 
   
@@ -152,47 +152,47 @@ const page = ({ params }) => {
             <h1 className="text-base text-center font-bold tracking-wide text-blue">
               {contest.contestTitle && (
                 <span className="text-[#000111] font-semibold">
-                  Contest title: {contest.contestTitle}
+                  Contest Title: {contest.contestTitle}
                 </span>
               )}
             </h1>
             <h1 className="text-base text-center font-bold tracking-wide text-blue">
               {contest.startDate && (
                 <span className="text-[#000111] font-semibold">
-                  Contest startDate: {contest.startDate}
+                  Contest Starting Time: {contest.startDate}
                 </span>
               )}
             </h1>
             <h1 className="text-base text-center font-bold tracking-wide text-blue">
               {contest.startDate && (
                 <span className="text-[#000111] font-semibold">
-                  Contest endDate: {contest.endDate}
+                  Contest Finishing Time: {contest.endDate}
                 </span>
               )}
             </h1>
             <h1 className="text-base text-center font-bold tracking-wide text-blue">
               {contest.startTime && (
                 <span className="text-[#000111] font-semibold">
-                  Contest startTime: {contest.startTime}
+                  Contest Starting Time: {contest.startTime}
                 </span>
               )}
             </h1>
             <h1 className="text-base text-center font-bold tracking-wide text-blue">
               {contest.duration !== 0 && (
                 <span className="text-[#000111] font-semibold">
-                  Contest duration: {contest.duration}
+                  Contest Duration: {contest.duration}
                 </span>
               )}
             </h1>
             <h1 className="text-base text-center font-bold tracking-wide">
               {contest.lastRegistationDate && (
                 <span className="text-[#000111] font-semibold">
-                  Contest lastRegistationDate: {contest.lastRegistationDate}
+                  Registration Closing Time: {contest.lastRegistationDate}
                 </span>
               )}
             </h1>
             <h1 className="text-base text-center font-bold tracking-wide">
-              remaining :{" "}
+              Time Remaining :{" "}
               {isNaN(timer) == false && (
                 <span className="text-[#000111] font-semibold">
                   {" "}
@@ -313,28 +313,28 @@ const page = ({ params }) => {
           <h1 className="text-base text-center font-bold tracking-wide text-blue">
             {
               <span className="text-[#000111] font-semibold">
-                Number Of Question: {numberOfQuestion}
+                Number Of Questions: {numberOfQuestion}
               </span>
             }
           </h1>
           <h1 className="text-base text-center font-bold tracking-wide text-blue">
             {
               <span className="text-[#000111] font-semibold">
-                Correct Answer: {setsOfCorrectAnswer.length}
+                Correct Answers: {setsOfCorrectAnswer.length}
               </span>
             }
           </h1>
           <h1 className="text-base text-center font-bold tracking-wide text-blue">
             {
               <span className="text-[#000111] font-semibold">
-                Wrong answer: {setsOfWrongAnswer.length}
+                Wrong Answers: {setsOfWrongAnswer.length}
               </span>
             }
           </h1>
           <h1 className="text-base text-center font-bold tracking-wide text-blue">
             {
               <span className="text-[#000111] font-semibold">
-                Not Answered:{numberOfQuestion - setsOfCorrectAnswer.length - setsOfWrongAnswer.length}
+                Not Answered: {numberOfQuestion - setsOfCorrectAnswer.length - setsOfWrongAnswer.length}
               </span>
             }
           </h1>

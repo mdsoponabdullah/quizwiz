@@ -42,7 +42,7 @@ const Popup = (props) => {
 
     await updateDoc(updateRef, data)
       .then(() => {
-        alert("updated");
+        alert("Updated");
         //isOpen(false)
         setIsOpen(false);
         window.location.reload();
@@ -60,14 +60,14 @@ const Popup = (props) => {
         onClick={togglePopup}
         className="bg-blue text-base text-[#ffffff] hover:bg-blue-700  font-semibold py-1 px-2 rounded-xl"
       >
-        Edit profile
+        Edit Profile
       </button>
       <div className="flex flex-col items-center mt-10 z-50 overflow-hidden ">
         {isOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 ">
             <div className="bg-white p-8 rounded shadow-md bg-[#F3E1BD]">
               <h2 className="text-lg font-semibold mb-2">
-                Update your profile
+                Update Your Profile
               </h2>
               <div className="bg-white p-3 shadow-sm rounded-sm">
                 <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
@@ -186,7 +186,7 @@ const Popup = (props) => {
                       </div>
                     </div>
                     <div className="grid grid-cols-2">
-                      <div className="px-4 py-2 font-semibold">Email.</div>
+                      <div className="px-4 py-2 font-semibold">Email</div>
                       <div className="px-4 py-2">
                         <input
                           type="email"
@@ -200,7 +200,7 @@ const Popup = (props) => {
                       </div>
                     </div>
                     <div className="grid grid-cols-2">
-                      <div className="px-4 py-2 font-semibold">Birthday</div>
+                      <div className="px-4 py-2 font-semibold">Date of Birth</div>
                       <div className="px-4 py-2">
                         {" "}
                         <input
@@ -214,7 +214,7 @@ const Popup = (props) => {
                       </div>
                     </div>
                     <div className="grid grid-cols-2">
-                      <div className="px-4 py-2 font-semibold">Profesion</div>
+                      <div className="px-4 py-2 font-semibold">Profession</div>
                       <div className="px-4 py-2">
                         <input
                           type="text"

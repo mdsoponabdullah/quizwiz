@@ -153,47 +153,47 @@ const page = ({ params }) => {
             <h1 className="text-base text-center font-bold tracking-wide text-blue">
               {contest.contestTitle && (
                 <span className="text-[#000111] font-semibold">
-                  Contest title: {contest.contestTitle}
+                  Contest Title: {contest.contestTitle}
                 </span>
               )}
             </h1>
             <h1 className="text-base text-center font-bold tracking-wide text-blue">
               {contest.startDate && (
                 <span className="text-[#000111] font-semibold">
-                  Contest startDate: {contest.startDate}
+                  Contest Starting Time: {contest.startDate}
                 </span>
               )}
             </h1>
             <h1 className="text-base text-center font-bold tracking-wide text-blue">
               {contest.startDate && (
                 <span className="text-[#000111] font-semibold">
-                  Contest endDate: {contest.endDate}
+                  Contest Finishing Time: {contest.endDate}
                 </span>
               )}
             </h1>
             <h1 className="text-base text-center font-bold tracking-wide text-blue">
               {contest.startTime && (
                 <span className="text-[#000111] font-semibold">
-                  Contest startTime: {contest.startTime}
+                  Contest Starting Time: {contest.startTime}
                 </span>
               )}
             </h1>
             <h1 className="text-base text-center font-bold tracking-wide text-blue">
               {contest.duration !== 0 && (
                 <span className="text-[#000111] font-semibold">
-                  Contest duration: {contest.duration}
+                  Contest Duration: {contest.duration}
                 </span>
               )}
             </h1>
             <h1 className="text-base text-center font-bold tracking-wide">
               {contest.lastRegistationDate && (
                 <span className="text-[#000111] font-semibold">
-                  Contest lastRegistationDate: {contest.lastRegistationDate}
+                  Registration Closing Time: {contest.lastRegistationDate}
                 </span>
               )}
             </h1>
             <h1 className="text-base text-center font-bold tracking-wide">
-              remaining :{" "}
+              Time Remaining :{" "}
               {isNaN(timer) == false && (
                 <span className="text-[#000111] font-semibold">
                   {" "}
@@ -315,7 +315,7 @@ const page = ({ params }) => {
           <h1 className="text-base text-center font-bold tracking-wide text-blue">
             {
               <span className="text-[#000111] font-semibold">
-                Number Of Question: {numberOfQuestion}
+                Total Questions: {numberOfQuestion}
               </span>
             }
           </h1>
@@ -329,14 +329,14 @@ const page = ({ params }) => {
           <h1 className="text-base text-center font-bold tracking-wide text-blue">
             {
               <span className="text-[#000111] font-semibold">
-                Wrong answer: {setsOfWrongAnswer.length}
+                Wrong Answer: {setsOfWrongAnswer.length}
               </span>
             }
           </h1>
           <h1 className="text-base text-center font-bold tracking-wide text-blue">
             {
               <span className="text-[#000111] font-semibold">
-                Not Answered:{numberOfQuestion - setsOfCorrectAnswer.length - setsOfWrongAnswer.length}
+                Not Answered: {numberOfQuestion - setsOfCorrectAnswer.length - setsOfWrongAnswer.length}
               </span>
             }
           </h1>
