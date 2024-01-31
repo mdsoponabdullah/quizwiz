@@ -6,7 +6,9 @@ import Popup from "../../component/updateUserInfo";
 import Loading from "../../component/loading";
 import UploadImage from "../../component/uploadprofileimage";
 import ContestStatitics from "../../component/contestStatistics";
-import BarChart from "../../component/BarChart";
+
+
+import UserPersonalContest from "../UserPersonalContest/page"
 import { useRouter } from "next/navigation";
 
 import Link from "next/link";
@@ -69,10 +71,7 @@ const Page = () => {
     });
   }
 
-  const data = {
-    score: score,
-    contestTitle: contestTitle,
-  };
+
 
   if (userData)
     return (
@@ -104,10 +103,7 @@ const Page = () => {
                 <p className="text-sm text-gray-500 hover:text-gray-600 leading-6  text-center">
                   {userData.discription}
                 </p>
-                {/* <div className="w-44  m-auto ">
-                  <h1 className="text-left font-bold border-b w-8/13">Skill</h1>
-                  <p>{skill}</p>
-                </div> */}
+
                 <ul className="bg-gray-100 text-gray-600 hover:text-gray-700  py-2 px-3 mt-3 divide-y rounded ">
                   <li className="flex items-center text-base py-3">
                     <span>Status</span>
@@ -121,7 +117,11 @@ const Page = () => {
                     <p>Member since</p>
                     <p className="ml-auto text-base">{userData.joinDate}</p>
                   </li>
+
                 </ul>
+                <div className="my-5 bg-[#e2e2f0]">
+                  <UserPersonalContest userId={user.uid} />
+                </div>
               </div>
               {/* End of profile card */}
               <div className="my-4" />
@@ -245,14 +245,14 @@ const Page = () => {
                 contestNumbers={contestNumbers}
                 virtualContestStatistics={userData.virtualContestStatistics}
               />
-              {/* <ContestStatitics
-                score={score}
-                contestNumbers={contestNumbers}
-                virtualContestStatistics={userData.virtualContestStatistics}
-              /> */}
+
+
             </div>
+
           </div>
+
         </div>
+
       </div>
     );
   else {
