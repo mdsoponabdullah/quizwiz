@@ -221,12 +221,9 @@ const Page = () => {
                     <div className="grid grid-cols-2">
                       <div className="textStyle1">Email.</div>
                       <div className="textStyle1">
-                        <a
-                          className="text-blue-800 textStyle1"
-                          href="mailto:jane@example.com"
-                        >
+                        
                           {userData.email}
-                        </a>
+                      
                       </div>
                     </div>
                     <div className="grid grid-cols-2">
