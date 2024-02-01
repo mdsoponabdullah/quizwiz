@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React from "react";
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from "react-icons/ai";
-import "./slider.css";
+import "./CSS/slider.css";
 
 const Slider = () => {
   const filteredItems = [

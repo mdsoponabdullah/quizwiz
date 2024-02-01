@@ -18,7 +18,7 @@ body {
     @apply mx-8 hover:bg-purple-700 hover:text-black focus:ring-4 focus:outline-none focus:ring-black focus:ring-offset-2 duration-500  px-4 sm:mx-3 sm:my-2 py-1 border sm:text-white sm:bg-red-600 bg-purple-200 rounded-full font-semibold;
   } */
   .btn-blue {
-    @apply bg-blue py-1 px-3 rounded-xl text-base;
+    @apply bg-blue py-1 px-3 rounded-xl font-bold text-base text-[#ffffff];
   }
 
   .inputBox1 {
@@ -34,7 +34,7 @@ body {
   }
 
   .input1 {
-    @apply px-1  text-base py-[2px] bg-[#ffffff] rounded-lg;
+    @apply px-1 text-base py-[2px] bg-[#ffffff] rounded-lg;
   }
 
   .textStyle1 {
@@ -42,6 +42,6 @@ body {
   }
 
   .linkStyle1 {
-    @apply text-base text-[#9d00ffe6] hover:text-[#df5d5d]  ;
+    @apply text-base text-[#9d00ffe6] hover:text-[#df5d5d];
   }
 }

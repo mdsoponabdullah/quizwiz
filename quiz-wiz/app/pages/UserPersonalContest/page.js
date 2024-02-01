@@ -34,7 +34,7 @@ const page = ({ userId }) => {
                 if (doc.data().contestCreator == userId) {
                     console.log(doc.data().contestCreator, userId)
                     const contest = { contestId: doc.id, contestData: doc.data() };
-                    console.log(doc.id, " => ", doc.data());
+                    // console.log(doc.id, " => ", doc.data());
 
                     setContests((prev) => {
                         return [...prev, contest]
@@ -89,7 +89,7 @@ const page = ({ userId }) => {
 
                                     <Link href={{
                                         pathname: '/pages/UpdateContest', query: {
-                                            contestId: contest.contestId, contestData: contest.contestData
+                                            contestId: contest.contestId
 
                                         }
                                     }} >
